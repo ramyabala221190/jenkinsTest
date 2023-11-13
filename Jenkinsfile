@@ -31,7 +31,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                bat('xcopy /i /s /e "./dist/jenkins-test/*" "../../node/"')
+                bat('xcopy /i /s /e "./dist/jenkins-test/*.*" "../../node/"')
 
             }
         }
