@@ -31,7 +31,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                bat("xcopy ./dist ../node /O /X /E /H /K")
+                bat("xcopy './dist' '../node' /O /X /E /H /K")
 
             }
         }
