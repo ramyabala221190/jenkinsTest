@@ -1,10 +1,26 @@
 pipeline {
     agent any
 
+      tools {nodejs "node"}
+
     stages {
+        stage('Clone'){
+            steps{
+                echo 'Cloning..'
+                git 'https://github.com/ramyabala221190/jenkinsTest.git'
+            }
+        }
+        stage('Install'){
+            steps{
+                echo 'Installing..'
+                sh 'npm install'            
+            }
+        }
         stage('Build') {
             steps {
                 echo 'Building..'
+                sh 'npm run build'
+
             }
         }
         stage('Test') {
@@ -15,6 +31,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                
             }
         }
     }
