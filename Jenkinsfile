@@ -31,13 +31,13 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                echo ${environment}
+                echo "${environment}"
                 // bat('echo Y | xcopy /i /s /e "./dist/jenkins-test/*.*" "../../node/"')
                
                 fileOperations([fileCopyOperation(
                                   flattenFiles: true, //includes only files 
                                   includes: 'dist/*/**',
-                                  targetNameExpression: 'C:/Users/User/node/web/'+ ${environment})]
+                                  targetNameExpression: 'C:/Users/User/node/web/${environment}')]
                                   )
 
             }
