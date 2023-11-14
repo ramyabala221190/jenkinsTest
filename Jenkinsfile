@@ -3,9 +3,6 @@ pipeline {
 
       tools {nodejs "Node"}
 
-      environment {
-        env="${environment}"
-    }
 
     stages {
         stage('Clone'){
@@ -36,13 +33,12 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 echo "${environment}"
-                echo "${env}"
                 // bat('echo Y | xcopy /i /s /e "./dist/jenkins-test/*.*" "../../node/"')
                
                 fileOperations([fileCopyOperation(
                                   flattenFiles: true, //includes only files 
                                   includes: 'dist/*/**',
-                                  targetNameExpression: 'C:/Users/User/node/web/$env')]
+                                  targetNameExpression: 'C:/Users/User/node/web/${environment}')]
                                   )
 
             }
