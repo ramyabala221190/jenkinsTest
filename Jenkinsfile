@@ -36,7 +36,7 @@ pipeline {
                 fileOperations([fileCopyOperation(
                                   flattenFiles: false,
                                   includes: 'dist/*/**',
-                                  targetLocation: '../../node/')]
+                                  targetLocation: 'C:/Users/User/node/')]
                                   )
 
             }
