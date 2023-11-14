@@ -33,12 +33,11 @@ pipeline {
                 echo 'Deploying....'
                 // bat('echo Y | xcopy /i /s /e "./dist/jenkins-test/*.*" "../../node/"')
                
-dir('C:/Users/User/angular/jenkinsTest/dist/jenkins-test/*') {
                 fileOperations([fileCopyOperation(
                     defaultexcludes:"no",
                                   flattenFiles: false,
-                                  includes: 'C:/Users/User/angular/jenkinsTest/dist/jenkins-test/*',
-                                  targetLocation: 'C:/Users/User/node/')]
+                                  includes: '/dist/jenkins-test/*',
+                                  targetLocation: '../../node/')]
                                   )
 
             }
