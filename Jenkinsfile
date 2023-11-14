@@ -4,7 +4,7 @@ pipeline {
       tools {nodejs "Node"}
 
       environment {
-        env=${environment}
+        env="${environment}"
     }
 
     stages {
