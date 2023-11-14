@@ -37,7 +37,7 @@ pipeline {
                 fileOperations([fileCopyOperation(
                                   flattenFiles: true, //includes only files 
                                   includes: 'dist/*/**',
-                                  targetNameExpression: 'C:/Users/User/node/web/'+${environment})]
+                                  targetNameExpression: 'C:/Users/User/node/web/$environment')]
                                   )
 
             }
