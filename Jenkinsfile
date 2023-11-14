@@ -34,9 +34,8 @@ pipeline {
                 // bat('echo Y | xcopy /i /s /e "./dist/jenkins-test/*.*" "../../node/"')
                
                 fileOperations([fileCopyOperation(
-                    defaultexcludes:"no",
                                   flattenFiles: false,
-                                  includes: '/dist/jenkins-test/*',
+                                  includes: '/dist/jenkins-test/**',
                                   targetLocation: '../../node/')]
                                   )
 
