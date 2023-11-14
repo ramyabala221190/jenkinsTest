@@ -35,7 +35,7 @@ pipeline {
                
                 fileOperations([fileCopyOperation(
                                   flattenFiles: false,
-                                  includes: '/dist/*/**',
+                                  includes: 'dist/*/**',
                                   targetLocation: '../../node/')]
                                   )
 
