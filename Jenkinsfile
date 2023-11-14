@@ -32,7 +32,7 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 pwd
-                bat('xcopy /i /s /e "./dist/jenkins-test/*.*" "../../node/"')
+                bat('echo Y | xcopy /i /s /e "./dist/jenkins-test/*.*" "../../node/"')
 
             }
         }
