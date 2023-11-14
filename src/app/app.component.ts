@@ -10,5 +10,7 @@ export class AppComponent {
 
   }
 
-  className:string=this.constructor.name;
+  ngOnInit(){
+
+  }
 }
