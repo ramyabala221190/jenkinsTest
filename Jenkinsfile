@@ -31,7 +31,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                pwd
                 bat('echo Y | xcopy /i /s /e "./dist/jenkins-test/*.*" "../../node/"')
 
             }
