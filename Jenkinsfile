@@ -32,18 +32,14 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 // bat('echo Y | xcopy /i /s /e "./dist/jenkins-test/*.*" "../../node/"')
-                def srcFileName = new File('C:/Users/User/angular/jenkinsTest/dist/jenkins-test/*').name
-def escapedSrcFolder = new File('C:/Users/User/angular/jenkinsTest/dist/jenkins-test/*').getParent().replace('/', '\\\\')
-def escapedDestFolderPath = 'C:/Users/User/node/'.replace('/', '\\\\')
-dir(escapedSrcFolder) {
-    fileOperations([
-        fileCopyOperation(
-            flattenFiles: true,
-            includes: srcFileName,
-            targetLocation: escapedDestFolderPath
-        )
-    ])
-}
+               
+dir('C:/Users/User/angular/jenkinsTest/dist/jenkins-test/*') {
+                fileOperations([fileCopyOperation(
+                    defaultexcludes:"no",
+                                  flattenFiles: false,
+                                  includes: 'C:/Users/User/angular/jenkinsTest/dist/jenkins-test/*',
+                                  targetLocation: 'C:/Users/User/node/')]
+                                  )
 
             }
         }
