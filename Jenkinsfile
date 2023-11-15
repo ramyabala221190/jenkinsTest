@@ -17,10 +17,23 @@ pipeline {
                 bat 'npm install'            
             }
         }
-        stage('Build') {
+        stage('Build using prod configuration') {
+            when{
+                ${environment} "prod"
+            }
             steps {
-                echo 'Building..'
-                bat 'npm run build'
+                echo 'Building using prod config..'
+                bat 'npm run build:prod'
+
+            }
+        }
+        stage('Build using dev configuration'){
+              when{
+                ${environment} "dev"
+            }
+            steps{
+                echo 'Builing using dev config'
+                bat  'npm run build:dev'
 
             }
         }
@@ -32,9 +45,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                echo "${environment}"
-                // bat('echo Y | xcopy /i /s /e "./dist/jenkins-test/*.*" "../../node/"')
-               
+                echo "${environment}"               
                 fileOperations([fileCopyOperation(
                                   flattenFiles: true, //includes only files 
                                   includes: 'dist/*/**',
