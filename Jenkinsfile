@@ -10,22 +10,24 @@ pipeline {
                 echo 'Cloning..'
                 git 'https://github.com/ramyabala221190/jenkinsTest.git'
             }
-        }
-        post{
+            post{
           success{
             echo 'Clone step completed'
           }
         }
+        }
+        
         stage('Install'){
             steps{
                 echo 'Installing..'
                 bat 'npm install'            
             }
-        }
-         post{
+             post{
           success{
             echo 'Install step completed'
           }
+        }
+        
         }
         stage('Build using prod configuration') {
             when{
@@ -38,12 +40,13 @@ pipeline {
                 bat 'npm run build:prod'
 
             }
-        }
-         post{
+            post{
           success{
             echo 'Build(prod) step completed'
           }
         }
+        }
+         
         stage('Build using dev configuration'){
               when{
                 //execute the stage only when the env variable with key environment has value dev
@@ -55,22 +58,24 @@ pipeline {
                 bat  'npm run build:dev'
 
             }
-        }
-         post{
+            post{
           success{
             echo 'Build(dev) step completed'
           }
         }
+        }
+         
         stage('Test') {
             steps {
                 echo 'Testing..'
             }
-        }
-         post{
+            post{
           success{
             echo 'Test step completed'
           }
         }
+        }
+         
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
@@ -88,10 +93,11 @@ pipeline {
             echo 'Deploy step completed'
           }
         }
-    }
-     post{
+         post{
           success{
-            echo 'All steps completed'
+            echo 'All step completed'
           }
         }
+    }
+    
 }
