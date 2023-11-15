@@ -4,7 +4,7 @@ pipeline {
       tools {nodejs "Node"}
 
       options{
-        timestamps()
+        timestamps() //Add timestamps to the Console Output
       }
 
 
@@ -13,7 +13,7 @@ pipeline {
             stages{
         stage('Clone'){
             steps{
-                echo 'Cloning ${env.BRANCH_NAME}'
+                echo 'Cloning ${BRANCH_NAME}'
                 git 'https://github.com/ramyabala221190/jenkinsTest.git'
             }
             post{
@@ -105,9 +105,12 @@ pipeline {
       post{
           failure{
             echo 'Workflow failed'
+            mail bcc: '', body: '', cc: '', from: '', replyTo: '', subject: '# ${BUILD_ID}Deployment for ${environment} failed.', to: 'ramya.bala221190@gmail.com'
+
           }
           success{
             echo 'Workflow succeeded'
+            mail bcc: '', body: '', cc: '', from: '', replyTo: '', subject: '# ${BUILD_ID}Deployment for ${environment} completed.', to: 'ramya.bala221190@gmail.com'
           }
          }
         }
