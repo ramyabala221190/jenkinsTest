@@ -105,12 +105,12 @@ pipeline {
       post{
           failure{
             echo 'Workflow failed'
-            mail bcc: '', body: '', cc: '', from: '', replyTo: '', subject: '# ${BUILD_ID}Deployment for ${environment} failed.', to: 'ramya.bala221190@gmail.com'
+            mail bcc: '', body: '${BUILD_TAG}', cc: '', from: '', replyTo: '', subject: '# ${BUILD_ID}Deployment for ${environment} failed.', to: 'ramya.bala221190@gmail.com'
 
           }
           success{
             echo 'Workflow succeeded'
-            mail bcc: '', body: '', cc: '', from: '', replyTo: '', subject: '# ${BUILD_ID}Deployment for ${environment} completed.', to: 'ramya.bala221190@gmail.com'
+            mail bcc: '', body: '${BUILD_TAG}', cc: '', from: '', replyTo: '', subject: '# ${BUILD_ID}Deployment for ${environment} completed.', to: 'ramya.bala221190@gmail.com'
           }
          }
         }
