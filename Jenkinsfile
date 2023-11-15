@@ -96,7 +96,7 @@ pipeline {
             }
              post{
           success{
-            echo 'Deploy step for ${env.BUILD_NUMBER} in ${environment} environment completed'
+            echo "Deploy step for ${env.BUILD_NUMBER} in ${environment} environment completed"
              }
             }
         
