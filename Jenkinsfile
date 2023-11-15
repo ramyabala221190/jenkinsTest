@@ -13,7 +13,6 @@ pipeline {
             stages{
         stage('Clone'){
             steps{
-                echo "Cloning ${ENV}"
                 echo "Cloning ${env}"
                 echo "Cloning ${ENV.BRANCH_NAME}"
                 git 'https://github.com/ramyabala221190/jenkinsTest.git'
