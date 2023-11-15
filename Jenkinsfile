@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    //always use double quotes for echo so that it works with accessing environmental variables
 
       tools {nodejs "Node"}
 
@@ -14,7 +15,6 @@ pipeline {
         stage('Clone'){
             steps{
                 echo "Cloning..."
-                echo "Build No :${env.BUILD_NUMBER}"
                 git 'https://github.com/ramyabala221190/jenkinsTest.git'
             }
             post{
@@ -96,7 +96,7 @@ pipeline {
             }
              post{
           success{
-            echo 'Deploy step completed'
+            echo 'Deploy step for ${env.BUILD_NUMBER} in ${environment} environment completed'
              }
             }
         
