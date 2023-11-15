@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Build using prod configuration') {
             when{
-                ${environment} "prod"
+                environment name: 'environment', value: 'prod'
             }
             steps {
                 echo 'Building using prod config..'
@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Build using dev configuration'){
               when{
-                ${environment} "dev"
+                environment name: 'environment', value: 'dev'
             }
             steps{
                 echo 'Builing using dev config'
