@@ -13,7 +13,8 @@ pipeline {
             stages{
         stage('Clone'){
             steps{
-                echo "Cloning $env.BRANCH_NAME"
+                echo "Cloning..."
+                echo "Build No :${env.BUILD_NUMBER}"
                 git 'https://github.com/ramyabala221190/jenkinsTest.git'
             }
             post{
