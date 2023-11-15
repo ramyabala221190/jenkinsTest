@@ -5,6 +5,8 @@ pipeline {
 
 
     stages {
+        stage('Workflow'){
+            stages{
         stage('Clone'){
             steps{
                 echo 'Cloning..'
@@ -14,7 +16,7 @@ pipeline {
           success{
             echo 'Clone step completed'
           }
-        }
+            }
         }
         
         stage('Install'){
@@ -26,7 +28,7 @@ pipeline {
           success{
             echo 'Install step completed'
           }
-        }
+           }
         
         }
         stage('Build using prod configuration') {
@@ -41,10 +43,10 @@ pipeline {
 
             }
             post{
-          success{
+              success{
             echo 'Build(prod) step completed'
-          }
-        }
+              }
+            }
         }
          
         stage('Build using dev configuration'){
@@ -61,8 +63,8 @@ pipeline {
             post{
           success{
             echo 'Build(dev) step completed'
-          }
-        }
+             }
+             }
         }
          
         stage('Test') {
@@ -72,8 +74,8 @@ pipeline {
             post{
           success{
             echo 'Test step completed'
-          }
-        }
+              }
+             }
         }
          
         stage('Deploy') {
@@ -87,16 +89,23 @@ pipeline {
                                   )
 
             }
-        }
-         post{
+             post{
           success{
             echo 'Deploy step completed'
-          }
+             }
+            }
+        
         }
-         post{
-          success{
-            echo 'All step completed'
+         
+      }
+      post{
+          failure{
+            echo 'Workflow failed'
           }
+          success{
+            echo 'Workflow succeeded'
+          }
+         }
         }
     }
     
