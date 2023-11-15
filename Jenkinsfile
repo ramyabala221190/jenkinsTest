@@ -36,41 +36,41 @@ pipeline {
            }
         
         }
-        stage('Build using prod configuration') {
-            when{
-                //execute the stage only when the env variable with key environment has value prod
-                //we are providing value for this key when running the pipeline
-                environment name: 'environment', value: 'prod'
-            }
+        stage("Build using ${environment} configuration") {
+            // when{
+            //     //execute the stage only when the env variable with key environment has value prod
+            //     //we are providing value for this key when running the pipeline
+            //     environment name: 'environment', value: 'prod'
+            // }
             steps {
-                echo 'Building using prod config..'
-                bat 'npm run build:prod'
+                echo "Building using ${environment} configuration"
+                bat "npm run build:${environment}"
 
             }
             post{
               success{
-            echo 'Build(prod) step completed'
+            echo 'Build step completed'
               }
             }
         }
          
-        stage('Build using dev configuration'){
-              when{
-                //execute the stage only when the env variable with key environment has value dev
-                //we are providing value for this key when running the pipeline
-                environment name: 'environment', value: 'dev'
-            }
-            steps{
-                echo 'Builing using dev config'
-                bat  'npm run build:dev'
+        // stage('Build using dev configuration'){
+        //       when{
+        //         //execute the stage only when the env variable with key environment has value dev
+        //         //we are providing value for this key when running the pipeline
+        //         environment name: 'environment', value: 'dev'
+        //     }
+        //     steps{
+        //         echo "Building using ${environment} configuration"
+        //         bat  'npm run build:dev'
 
-            }
-            post{
-          success{
-            echo 'Build(dev) step completed'
-             }
-             }
-        }
+        //     }
+        //     post{
+        //   success{
+        //     echo 'Build(dev) step completed'
+        //      }
+        //      }
+        // }
          
         stage('Test') {
             steps {
@@ -86,17 +86,16 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                echo "${environment}"               
                 fileOperations([fileCopyOperation(
                                   flattenFiles: true, //includes only files 
                                   includes: 'dist/*/**',
-                                  targetLocation: 'C:/Users/User/node/web/${environment}')]
+                                  targetLocation: "C:/Users/User/node/web/${environment}")]
                                   )
 
             }
              post{
           success{
-            echo "Deploy step for ${env.BUILD_NUMBER} in ${environment} environment completed"
+            echo "Deploy step for #${env.BUILD_NUMBER} in ${environment} environment completed"
              }
             }
         
