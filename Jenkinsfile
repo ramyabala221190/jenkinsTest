@@ -36,7 +36,7 @@ pipeline {
            }
         
         }
-        stage("Build using ${environment} configuration") {
+        stage("Build step") {
             // when{
             //     //execute the stage only when the env variable with key environment has value prod
             //     //we are providing value for this key when running the pipeline
