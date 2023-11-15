@@ -3,13 +3,17 @@ pipeline {
 
       tools {nodejs "Node"}
 
+      options{
+        timestamps()
+      }
+
 
     stages {
         stage('Workflow'){
             stages{
         stage('Clone'){
             steps{
-                echo 'Cloning..'
+                echo 'Cloning ${env.BRANCH_NAME}'
                 git 'https://github.com/ramyabala221190/jenkinsTest.git'
             }
             post{
