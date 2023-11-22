@@ -36,7 +36,7 @@ pipeline{
                     }
                     steps {
                         echo 'Running'
-                        bat "docker run -dp 8800:8083 -it angular-image-${environment}"
+                        bat "docker run -dp 8800:8083 -it jenkins-test-${environment}"
                     }
                 
                 }
@@ -46,7 +46,7 @@ pipeline{
                     }
                     steps {
                         echo 'Running'
-                        bat "docker run -dp 8800:8082 -it angular-image-${environment}"
+                        bat "docker run -dp 8800:8082 -it jenkins-test-${environment}"
                     }
                 
                 }
