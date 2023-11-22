@@ -31,7 +31,7 @@ VOLUME /var/cache/nginx
 
 RUN echo $(ls -l /usr/share/nginx/html)
 
-RUN mkdir -p /usr/share/nginx/html/${env}
+RUN mkdir -p -v /usr/share/nginx/html/${env}
 
 RUN echo $(ls -l /usr/share/nginx/html)
 
