@@ -29,7 +29,7 @@ FROM nginx:alpine
 #caching files
 VOLUME /var/cache/nginx 
 
-RUN echo $(ls -l /var/www/)
+RUN echo $(ls -l /etc/nginx/sites-enabled/)
 
 RUN echo $(ls -l /usr/share/nginx/html)
 
