@@ -5,6 +5,8 @@ ARG env="prod"
 LABEL author="Ramya"
 RUN mkdir /app
 WORKDIR /app
+
+RUN echo ${env}
 # node is the base image from which Docker will include all functionality into the image we will be crearting
 # Its like a parent class from which we are inheriting all features into the child class
 
