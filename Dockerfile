@@ -29,14 +29,6 @@ FROM nginx:alpine
 #caching files
 VOLUME /var/cache/nginx 
 
-RUN echo $(ls -l /usr/local/etc/nginx)
-
-RUN echo $(ls -l /usr/share/nginx/html)
-
-RUN mkdir -pv /usr/share/nginx/html/${env}
-
-RUN echo $(ls -l /usr/share/nginx/html)
-
 #Now I need to access the dist folder from the previous stage. 
 # I copy the dist folder into the folder that nginx uses to refer static files.
 COPY --from=node /app/dist/jenkins-test /usr/share/nginx/html/
@@ -45,6 +37,9 @@ COPY --from=node /app/dist/jenkins-test /usr/share/nginx/html/
 # nginx might think its a server side path and return 404. In such cases we instruct nginx to 
 # redirect to index.html file. This is very important
 COPY ./config/nginx.config /etc/nginx/conf.d/default.conf
+
+
+RUN echo $(ls -l /usr/share/nginx/html)
 
 # Use the below docker build and run commands. We are creating 2 images below: angular-image-prod and angular-image-dev
 # We want to load the prod config in the environment.prod.ts when running angular-image-prod
