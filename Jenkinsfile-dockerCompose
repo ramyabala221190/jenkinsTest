@@ -1,0 +1,33 @@
+/* groovylint-disable NestedBlockDepth */
+/* groovylint-disable-next-line CompileStatic */
+pipeline {
+    agent any
+
+    options {
+        skipDefaultCheckout(true)
+        timestamps() //Add timestamps to the Console Output
+    }
+
+    stages{
+        stage('Docker Workflow') {
+            stages{
+              
+                stage('Docker Build') {
+                    steps {
+                        echo 'Running Docker Compose build'
+                        bat "docker compose -e env=${environment} -f compose.yaml build"
+                    }
+                }
+                stage('Docker Compose Up') {
+                    
+                    steps {
+                        echo 'Running Docker Compose Up'
+                        script{
+                            bat "docker compose -f compose.yaml up"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
