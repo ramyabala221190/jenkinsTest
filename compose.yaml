@@ -4,7 +4,7 @@ services:
      container-name:
        nginx-container
      image:
-      nginx-image:${env}
+      nginx-image
      build:
         context: .
         dockerfile:

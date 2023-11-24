@@ -20,7 +20,7 @@ pipeline {
                 stage('Docker Build') {
                     steps {
                         echo 'Running Docker Compose build'
-                        bat "docker-compose -e env=${environment} -f compose.yaml build"
+                        bat "docker-compose -f compose.yaml build"
                     }
                 }
                 stage('Docker Compose Up') {
