@@ -1,5 +1,10 @@
 /* groovylint-disable NestedBlockDepth */
 /* groovylint-disable-next-line CompileStatic */
+
+/*
+How to pass env variables from
+
+*/
 pipeline {
     agent any
 
@@ -15,7 +20,7 @@ pipeline {
                 stage('Docker Build') {
                     steps {
                         echo 'Running Docker Compose build'
-                        bat "docker compose --build-arg env=${environment} -f compose.yaml build"
+                        bat "docker-compose --e env=${environment} -f compose.yaml build"
                     }
                 }
                 stage('Docker Compose Up') {
@@ -23,7 +28,7 @@ pipeline {
                     steps {
                         echo 'Running Docker Compose Up'
                         script{
-                            bat "docker compose -f compose.yaml up"
+                            bat "docker-compose -f compose.yaml up"
                         }
                     }
                 }
