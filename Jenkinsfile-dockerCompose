@@ -9,7 +9,7 @@ pipeline {
     agent any
 
     options {
-        skipDefaultCheckout(true)
+        //skipDefaultCheckout(true)
         timestamps() //Add timestamps to the Console Output
     }
 
