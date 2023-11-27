@@ -40,6 +40,11 @@ pipeline {
                         bat "docker image tag ngnix-image dockerenthusiast1992/learningdocker1992:${env.BUILD_NUMBER}"
                         bat "docker image push nginx-image --all-tags"
                     }
+                    post {
+                        success {
+                           bat "docker logout"
+                        }
+                    }
                 }
                 stage('Docker Compose Up') {
                     
