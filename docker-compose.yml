@@ -2,7 +2,7 @@ version: '3.7'
 services:
    nginx:
      container_name: nginx-container
-     image: ${image-name}:${image-tag}
+     image: nginx-image:latest
      build:
         context: .
         dockerfile: Dockerfile
