@@ -36,10 +36,11 @@ pipeline {
                 stage('Docker Push') {
                     steps{
                         echo 'Retagging image and Pushing image'
-                        bat  "docker login -u ${DOCKER_HUB_CRED_USR} --password ${DOCKER_HUB_CRED_PSW}"
+                        echo '${DOCKER_HUB_CRED_USR}'
+                        bat  "sudo docker login -u ${DOCKER_HUB_CRED_USR} --password ${DOCKER_HUB_CRED_PSW}"
                         //bat "docker image tag ngnix-image:latest dockerenthusiast1992/learningdocker1992:${env.BUILD_NUMBER}"
                         // bat "docker image push dockerenthusiast1992/learningdocker1992:${env.BUILD_NUMBER}"
-                        bat "docker image push nginx-image:latest"
+                        bat "sudo docker image push nginx-image:latest"
                     }
                 }
                 stage('Docker Compose Up') {
