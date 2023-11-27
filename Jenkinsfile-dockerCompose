@@ -12,7 +12,7 @@ pipeline {
     stages{
         stage('Docker Workflow') {
             stages{
-                 stage('Clone') {
+                stage('Clone') {
                     steps {
                         echo 'Cloning...'
                         cleanWs() //Workspace Clean Plugin to delete the workspace before cloning and building
@@ -29,11 +29,12 @@ pipeline {
                         bat "docker compose build --build-arg env=${environment}"
                     }
                 }
-                stage('Docker Push'){
+                stage('Docker Push') {
                     steps{
-                        echo "Retagging image and Pushing image"
-                        bat "docker image tag ngnix-image:latest dockerenthusiast1992/learningdocker1992:${env.BUILD_NUMBER}"
-                        bat "docker image push dockerenthusiast1992/learningdocker1992:${env.BUILD_NUMBER}"
+                        echo 'Retagging image and Pushing image'
+                        bat  "docker login -u dockerenthusiast1992 --password-stdin"
+                        //bat "docker image tag ngnix-image:latest dockerenthusiast1992/learningdocker1992:${env.BUILD_NUMBER}"
+                        // bat "docker image push dockerenthusiast1992/learningdocker1992:${env.BUILD_NUMBER}"
                         bat "docker image push nginx-image:latest"
                     }
                 }
