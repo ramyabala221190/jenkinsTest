@@ -20,7 +20,7 @@ pipeline {
                 stage('Docker Build') {
                     steps {
                         echo 'Running Docker Compose build'
-                        bat "docker compose build -f compose.yaml"
+                        bat "docker-compose build -f compose.yaml"
                     }
                 }
                 stage('Docker Compose Up') {
@@ -28,7 +28,7 @@ pipeline {
                     steps {
                         echo 'Running Docker Compose Up'
                         script{
-                            bat "docker compose up -f compose.yaml"
+                            bat "docker-compose up -f compose.yaml"
                         }
                     }
                 }
