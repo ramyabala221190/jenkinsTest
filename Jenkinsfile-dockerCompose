@@ -20,7 +20,7 @@ pipeline {
                 stage('Docker Build') {
                     steps {
                         echo 'Running Docker Compose build'
-                        bat "docker-compose ls"
+                        bat "docker compose ls"
                         bat "docker compose build"
                     }
                 }
