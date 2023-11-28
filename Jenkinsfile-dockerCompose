@@ -37,8 +37,8 @@ pipeline {
                     steps{
                         echo 'Retagging image and Pushing image'
                         bat  "docker login -u ${DOCKER_HUB_CRED_USR} -p ${DOCKER_HUB_CRED_PSW} docker.io"
-                        bat  "docker tag ngnix-image dockerenthusiast1992/ngnix-image:${env.BUILD_NUMBER}"
-                        bat "docker push dockerenthusiast1992/ngnix-image:${env.BUILD_NUMBER}"
+                        //bat  "docker tag ngnix-image dockerenthusiast1992/ngnix-image:${env.BUILD_NUMBER}"
+                        bat "docker push dockerenthusiast1992/ngnix-image"
                     }
                     post {
                         success {
