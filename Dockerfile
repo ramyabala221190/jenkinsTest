@@ -39,8 +39,10 @@ COPY --from=node /app/dist/jenkins-test /usr/share/nginx/html/
 # redirect to index.html file. This is very important
 COPY ./config/nginx.config /etc/nginx/conf.d/default.conf
 
+EXPOSE 80
 
-RUN echo $(ls -l /usr/share/nginx/html)
+CMD nginx -g "daemon off;"
+
 
 # Use the below docker build and run commands. We are creating 2 images below: angular-image-prod and angular-image-dev
 # We want to load the prod config in the environment.prod.ts when running angular-image-prod
