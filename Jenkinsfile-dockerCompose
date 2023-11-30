@@ -10,7 +10,7 @@ pipeline {
     }
 
     environment{
-        DOCKER_HUB_CRED=credentials('dockerHubRegistryCredentials')
+        DOCKER_HUB_CRED=credentials('dockerHubRegistryCredentials') //pulling the DockerHub crendetials saved in Jenkins-->Dashboard--->Credentials
     }
 
     stages{
@@ -35,9 +35,13 @@ pipeline {
                 }
                 stage('Docker Push') {
                     steps{
-                        echo 'Retagging image and Pushing image'
+                        echo 'Retagging image and Pushing image to DockerHub'
                         bat  "docker login -u ${DOCKER_HUB_CRED_USR} -p ${DOCKER_HUB_CRED_PSW} docker.io"
                         bat  "docker tag dockerenthusiast1992/ngnix-image dockerenthusiast1992/ngnix-image:${env.BUILD_NUMBER}"
+                        /*
+The same image with different tags will have the same image id. Its the same image tagged differently.
+format of the image is <username>/<image-name>:tag. If you provide no tag it is assumed to be latest
+                        */
                         bat  "docker push dockerenthusiast1992/ngnix-image:${env.BUILD_NUMBER}"
                     }
                     post {
