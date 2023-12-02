@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build:prod": "ng build --configuration production",
     "build:dev": "ng build --configuration development",
+    "build:common": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test --code-coverage --watch=false --browsers=ChromeHeadlessNoSandbox"
   },

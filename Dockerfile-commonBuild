@@ -14,8 +14,15 @@ COPY package.json package-lock.json ./
 RUN npm cache clean --force
 RUN npm install
 COPY . .   
+#copy from the local folder where the Docker file to the working directory you have declared
+COPY ./src/environments/environment.${env}.ts  ./src/environments/environment.ts
+# Based on the ARG env we pass in the docker build command, we swap the environment files so that the correct env file can be accessed
+# in the application. This is useful if we are deploying the same build to all environments but the env related information eg: backend
+#url differs between the environments. Since we are using prod env in the ng build command, the environment.prod.ts will be used by the application
+#But when deploying to dev env, we require the dev specific env file to be accessed by the application. So we pass the correct env to the docker build command. We copy
+# that env's env file to the environment.prod.ts so that the correct env config info is available to the application
 
-RUN npm run build:${env}
+RUN npm run build:common
 
 #Stage 2
 
