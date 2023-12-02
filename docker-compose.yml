@@ -5,8 +5,8 @@ services:
      image: dockerenthusiast1992/ngnix-image
      build:
         context: .
-        dockerfile: Dockerfile
-        #dockerfile:Dockerfile-commonBuild
+        dockerfile: Dockerfile-commonBuild
+        #dockerfile: Dockerfile
      ports:
      - "8082:80"
      - "8083:80"
