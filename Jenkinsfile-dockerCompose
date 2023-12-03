@@ -21,7 +21,7 @@ pipeline {
                         echo 'Cloning...'
                         cleanWs() //Workspace Clean Plugin to delete the workspace before cloning and building
                         //we are using the installed Git plugin to clone the branch from the repo
-                        git branch: "${env.Branch}", changelog: false,
+                        git branch: '$env.Branch', changelog: false,
                         credentialsId: 'b2b655c9-f74f-4813-8dfd-f2a565931b80',
                         poll: false, url: 'https://github.com/ramyabala221190/jenkinsTest.git'
                     }
@@ -30,21 +30,21 @@ pipeline {
                 stage('Docker Build') {
                     steps {
                         echo 'Running Docker Compose build'
-                        bat "docker compose build --build-arg env=${environment}"
+                        bat 'docker compose build --build-arg env=$environment'
                     }
                 }
                 stage('Docker Push') {
                     steps{
                         echo 'Retagging image and Pushing image to DockerHub'
-                        bat  "docker login -u ${DOCKER_HUB_CRED_USR} -p ${DOCKER_HUB_CRED_PSW} docker.io"
-                        bat  "docker image prune --force" /* removes all dangling images. Will not remove unused images. --force tag ensures no prompt for confirmation will be there*/
-                        bat  "docker tag ${DOCKER_HUB_CRED_USR}/ngnix-image ${DOCKER_HUB_CRED_USR}/ngnix-image:${env.BUILD_NUMBER}-${environment}"
+                        bat  'docker login -u $DOCKER_HUB_CRED_USR -p $DOCKER_HUB_CRED_PSW docker.io'
+                        bat  "docker image prune --force"  /* removes all dangling images. Will not remove unused images. --force tag ensures no prompt for confirmation will be there*/
+                        bat  'docker tag $DOCKER_HUB_CRED_USR/ngnix-image $DOCKER_HUB_CRED_USR/ngnix-image:$env.BUILD_NUMBER-$environment'
                         /*
 The same image with different tags will have the same image id. Its the same image tagged differently.
 format of the image is <username>/<image-name>:tag. If you provide no tag it is assumed to be latest
                         */
-                        bat  "docker push ${DOCKER_HUB_CRED_USR}/ngnix-image:${env.BUILD_NUMBER}-${environment}"
-                        bat  "docker push ${DOCKER_HUB_CRED_USR}/ngnix-image"
+                        bat  'docker push $DOCKER_HUB_CRED_USR/ngnix-image:$env.BUILD_NUMBER-$environment'
+                        bat  'docker push $DOCKER_HUB_CRED_USR/ngnix-image'
 
                     }
                     post {
