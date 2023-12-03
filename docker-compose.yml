@@ -1,8 +1,8 @@
-version: '3.7'
 services:
    nginx:
      container_name: nginx-container
-     image: dockerenthusiast1992/ngnix-image
+     image: ${dockerUserName}/nginx-image
+     #image: dockerenthusiast1992/ngnix-image
      build:
         context: .
         #dockerfile: Dockerfile-commonBuild
