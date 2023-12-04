@@ -6,14 +6,14 @@ pipeline {
     agent any
 
     options {
-        skipDefaultCheckout(true)
+        skipDefaultCheckout(true) //prevent default checkout of git branch
         timestamps() //Add timestamps to the Console Output
     }
 
     environment{
         DOCKER_HUB_CRED=credentials('dockerHubRegistryCredentials') //pulling the DockerHub crendetials saved in Jenkins-->Dashboard--->Credentials
-        appPort= envPortMapping(env.environment)
-        containerPort=80
+        appPort= envPortMapping(env.environment) //decide the application port based on the environment
+        containerPort=80 //fix the container port
     }
 
     stages{
@@ -42,13 +42,13 @@ pipeline {
                         echo 'Retagging image and Pushing image to DockerHub'
                         bat  "docker login -u ${DOCKER_HUB_CRED_USR} -p ${DOCKER_HUB_CRED_PSW} docker.io"
                         bat  "docker image prune --force"  /* removes all dangling images. Will not remove unused images. --force tag ensures no prompt for confirmation will be there*/
-                        bat  "docker tag ${DOCKER_HUB_CRED_USR}/ngnix-image ${DOCKER_HUB_CRED_USR}/ngnix-image:${env.BUILD_NUMBER}-${environment}"
+                        bat  "docker tag ${DOCKER_HUB_CRED_USR}/ngnix-image ${DOCKER_HUB_CRED_USR}/ngnix-image:${env.BUILD_NUMBER}-${env.environment}"
                         /*
 The same image with different tags will have the same image id. Its the same image tagged differently.
 format of the image is <username>/<image-name>:tag. If you provide no tag it is assumed to be latest
                         */
                         bat ""
-                        bat  "docker push ${DOCKER_HUB_CRED_USR}/ngnix-image:${env.BUILD_NUMBER}-${environment}"
+                        bat  "docker push ${DOCKER_HUB_CRED_USR}/ngnix-image:${env.BUILD_NUMBER}-${env.environment}"
                         bat  "docker push ${DOCKER_HUB_CRED_USR}/ngnix-image"
 
                     }

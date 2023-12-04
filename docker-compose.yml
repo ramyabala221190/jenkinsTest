@@ -2,7 +2,6 @@ services:
    nginx:
      container_name: nginx-container
      image: ${DOCKER_HUB_CRED_USR}/nginx-image
-     #image: dockerenthusiast1992/ngnix-image
      build:
         context: .
         #dockerfile: Dockerfile-commonBuild
