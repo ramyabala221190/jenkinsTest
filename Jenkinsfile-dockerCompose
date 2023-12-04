@@ -75,10 +75,10 @@ This will recreate if there are any existing containers with the same name. If n
 }
 
 def envPortMapping(envName){
-    if(envName === "dev"){
-        return 8082;
+    if(envName.equals("dev")){
+        return 8082
     }
-    else if(envName ===" prod"){
-        return 8083;
+    else if(envName.equals("prod")){
+        return 8083
     }
 }
