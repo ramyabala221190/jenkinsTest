@@ -46,7 +46,6 @@ pipeline {
 The same image with different tags will have the same image id. Its the same image tagged differently.
 format of the image is <username>/<image-name>:tag. If you provide no tag it is assumed to be latest
                         */
-                        bat ""
                         bat  "docker push ${DOCKER_HUB_CRED_USR}/ngnix-image:${env.BUILD_NUMBER}-${env.environment}"
                         bat  "docker push ${DOCKER_HUB_CRED_USR}/ngnix-image"
 
