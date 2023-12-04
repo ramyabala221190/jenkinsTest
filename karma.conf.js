@@ -32,6 +32,12 @@ module.exports = function (config) {
         { type: 'text-summary' }
       ]
     },
+    customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: "ChromeHeadless",
+        flags: ["--no-sandbox"]
+      }
+    },
     reporters: ['progress', 'kjhtml'],
     browsers: ['ChromeHeadlessNoSandbox'],
     restartOnFileChange: true
