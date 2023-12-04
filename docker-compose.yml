@@ -8,7 +8,6 @@ services:
         #dockerfile: Dockerfile-commonBuild
         dockerfile: Dockerfile
      ports:
-     - "8082:80"
-     - "8083:80"
+     - ${appPort}:${containerPort}
 
 
