@@ -77,12 +77,12 @@ This will recreate if there are any existing containers with the same name. If n
 }
 
 def envPortMapping(){
-    echo "${env}"
-    echo "${env.enviornment}"
-    if("${env.environment}".equals("dev")){
+    //echo "${env}"
+    echo "${env.environment}"
+    if(${env.environment}.equals("dev")){
         return 8082
     }
-    else if("${env.environment}".equals("prod")){
+    else if(${env.environment}.equals("prod")){
         return 8083
     }
 }
