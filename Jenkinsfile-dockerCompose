@@ -12,7 +12,7 @@ pipeline {
 
     environment{
         DOCKER_HUB_CRED=credentials('dockerHubRegistryCredentials') //pulling the DockerHub crendetials saved in Jenkins-->Dashboard--->Credentials
-        appPort= envPortMapping("${environment}")
+        appPort= envPortMapping()
         containerPort=80
     }
 
@@ -32,6 +32,7 @@ pipeline {
               
                 stage('Docker Build') {
                     steps {
+                        echo "${environment}"
                         echo 'Running Docker Compose build'
                         bat  "docker compose build --build-arg env=${environment}"
                     }
@@ -46,6 +47,7 @@ pipeline {
 The same image with different tags will have the same image id. Its the same image tagged differently.
 format of the image is <username>/<image-name>:tag. If you provide no tag it is assumed to be latest
                         */
+                        bat ""
                         bat  "docker push ${DOCKER_HUB_CRED_USR}/ngnix-image:${env.BUILD_NUMBER}-${environment}"
                         bat  "docker push ${DOCKER_HUB_CRED_USR}/ngnix-image"
 
@@ -74,11 +76,12 @@ This will recreate if there are any existing containers with the same name. If n
 
 }
 
-def envPortMapping(envName){
-    if(envName.equals("dev")){
+def envPortMapping(){
+    echo "${enviornment}"
+    if("${environment}".equals("dev")){
         return 8082
     }
-    else if(envName.equals("prod")){
+    else if("${environment}".equals("prod")){
         return 8083
     }
 }
