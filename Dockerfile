@@ -15,6 +15,7 @@ RUN npm cache clean --force
 RUN npm install
 COPY . .   
 
+RUN npm run test
 RUN npm run build:${env}
 
 #Stage 2
