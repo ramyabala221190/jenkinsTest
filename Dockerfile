@@ -2,19 +2,20 @@
 #as node means you are creating an alias for this stage to be accessed in the future stages
 FROM node:alpine as node
 ARG env="prod"
-LABEL author="Ramya"
+LABEL author="Angular Enthusiast"
 RUN mkdir /app
 WORKDIR /app
-
-RUN echo ${env}
 # node is the base image from which Docker will include all functionality into the image we will be crearting
 # Its like a parent class from which we are inheriting all features into the child class
+
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
 
 COPY package.json package-lock.json ./
 RUN npm cache clean --force
 RUN npm install
 COPY . .   
-
+#copy all the files and folders from the directory where the Dockerfile is present into the working directory i.e /app
 RUN npm run test
 RUN npm run build:${env}
 
