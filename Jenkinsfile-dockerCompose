@@ -30,7 +30,7 @@ pipeline {
                 stage('Docker Build') {
                     steps {
                         echo 'Running Docker Compose build'
-                        bat "dockerUserName=${DOCKER_HUB_CRED_USR};docker compose build --build-arg env=${environment}"
+                        bat  "docker compose build --build-arg env=${environment}"
                     }
                 }
                 stage('Docker Push') {
