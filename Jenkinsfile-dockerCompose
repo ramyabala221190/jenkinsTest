@@ -12,7 +12,7 @@ pipeline {
 
     environment{
         DOCKER_HUB_CRED=credentials('dockerHubRegistryCredentials') //pulling the DockerHub crendetials saved in Jenkins-->Dashboard--->Credentials
-        appPort= "${env.environment === 'dev' ? 8082 :8083}"
+        appPort= envPortMapping(env.environment)
         containerPort=80
     }
 
