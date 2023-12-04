@@ -12,7 +12,7 @@ pipeline {
 
     environment{
         DOCKER_HUB_CRED=credentials('dockerHubRegistryCredentials') //pulling the DockerHub crendetials saved in Jenkins-->Dashboard--->Credentials
-        appPort= envPortMapping()
+        appPort= envPortMapping(${env.environment})
         containerPort=80
     }
 
@@ -76,16 +76,12 @@ This will recreate if there are any existing containers with the same name. If n
 
 }
 
-def envPortMapping(){
-    //echo "${env}"
-    echo "${env.environment}"
-    console.log(${env.environment}.equals("prod"))
-    console.log(${env.environment}.equals("dev"))
+def envPortMapping(envName){
 
-    if(${env.environment}.equals("dev")){
+    if(envName.equals("dev")){
         return 8082
     }
-    else if(${env.environment}.equals("prod")) {
+    else if(envName.equals("prod")) {
         return 8083
     }
 }
