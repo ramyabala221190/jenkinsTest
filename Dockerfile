@@ -8,9 +8,6 @@ WORKDIR /app
 # node is the base image from which Docker will include all functionality into the image we will be crearting
 # Its like a parent class from which we are inheriting all features into the child class
 
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
-
 COPY package.json package-lock.json ./
 RUN npm cache clean --force
 RUN npm install
