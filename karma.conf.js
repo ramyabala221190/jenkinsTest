@@ -39,7 +39,7 @@ module.exports = function (config) {
       }
     },
     reporters: ['progress', 'kjhtml'],
-    browsers: ['ChromeHeadlessNoSandbox'],
+    browsers: ['C:\Program Files\Google\Chrome\Application\chrome.exe'],
     restartOnFileChange: true
   });
 };
