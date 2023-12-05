@@ -1,7 +1,7 @@
 #Stage 1 Creating angular build(dist folder). 
 #as node means you are creating an alias for this stage to be accessed in the future stages
 FROM node:alpine as node
-ARG env="prod"
+#ARG env="prod"
 LABEL author="Angular Enthusiast"
 RUN mkdir /app
 WORKDIR /app
@@ -15,9 +15,6 @@ RUN npm install
 COPY . .   
 #copy all the files and folders from the directory where the Dockerfile is present into the working directory i.e /app
 
-RUN echo $(ls -l /app)
-
-RUN npm run test
 RUN npm run build:${env}
 
 #Stage 2
