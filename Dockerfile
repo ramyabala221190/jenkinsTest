@@ -3,8 +3,13 @@
 FROM node:alpine as node
 ARG env
 LABEL author="Angular Enthusiast"
-RUN mkdir /app
-WORKDIR /app
+LABEL devURL="http://localhost:8082"
+LABEL prodUrl="http://localhost:8083"
+LABEL description="We aim to deploy the angular app to DockerHub"
+#RUN mkdir /app
+#WORKDIR /app
+
+RUN pwd
 
 # node is the base image from which Docker will include all functionality into the image we will be crearting
 # Its like a parent class from which we are inheriting all features into the child class
