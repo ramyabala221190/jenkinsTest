@@ -6,12 +6,9 @@ LABEL author="Angular Enthusiast"
 LABEL devURL="http://localhost:8082"
 LABEL prodUrl="http://localhost:8083"
 LABEL description="We aim to deploy the angular app to DockerHub"
-#RUN mkdir /app
+
 WORKDIR /app
 #WORKDIR will create the app directory if it doesnt already exist
-
-RUN pwd
-#prints the current working directory
 
 # node is the base image from which Docker will include all functionality into the image we will be crearting
 # Its like a parent class from which we are inheriting all features into the child class
@@ -22,9 +19,6 @@ RUN npm install
 COPY . .
 #copy all the files and folders from the directory where the Dockerfile is present into the working directory i.e /app
 
-RUN echo $(ls -l /)
-RUN echo $(ls -l /app)
-
 RUN npm run build:${env}
 
 #Stage 2
@@ -33,8 +27,6 @@ FROM nginx:alpine
 
 #caching files
 VOLUME /var/cache/nginx 
-
-RUN echo $(cat /etc/nginx/conf.d/default.conf)
 
 #Now I need to access the dist folder from the previous stage. 
 # I copy the dist folder into the folder that nginx uses to refer static files.
@@ -47,4 +39,4 @@ COPY ./config/nginx.config /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
-CMD nginx -g "daemon off;"
+CMD [nginx, '-g', 'daemon off;']
