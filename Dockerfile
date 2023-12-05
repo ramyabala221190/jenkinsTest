@@ -6,9 +6,8 @@ LABEL author="Angular Enthusiast"
 RUN mkdir /app
 WORKDIR /app
 
-RUN ECHO $(ls /app)
 
-ENV CHROME_BIN=/usr/bin/google-chrome
+ENV CHROME_BIN="/usr/bin/chromium-browser"
 # node is the base image from which Docker will include all functionality into the image we will be crearting
 # Its like a parent class from which we are inheriting all features into the child class
 
