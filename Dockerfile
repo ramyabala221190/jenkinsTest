@@ -6,8 +6,9 @@ LABEL author="Angular Enthusiast"
 LABEL devURL="http://localhost:8082"
 LABEL prodUrl="http://localhost:8083"
 LABEL description="We aim to deploy the angular app to DockerHub"
-RUN mkdir /app
+#RUN mkdir /app
 WORKDIR /app
+#WORKDIR will create the app directory if it doesnt already exist
 
 RUN pwd
 #prints the current working directory
