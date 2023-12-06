@@ -41,8 +41,11 @@ pipeline {
                         bat  "docker image prune --force"  /* removes all dangling images. Will not remove unused images. --force tag ensures no prompt for confirmation will be there*/
                         bat  "docker image tag angular-nginx-image ${DOCKER_HUB_CRED_USR}/angular-nginx:${env.BUILD_NUMBER}-${env.environment}"
                         /*
-The same image with different tags will have the same image id. Its the same image tagged differently.
-format of the image is <username>/<image-name>:tag. If you provide no tag it is assumed to be latest*/
+We have built an image with the name :angular-nginx-image as specified in the docker-compose.yml. We need to tag this image to the format:
+DockerhubUsername/DockerHubRepoName/some-image-name:tag
+Not that the tagged image is pushed to the Docker hub.
+https://docs.docker.com/get-started/04_sharing_app/ Refer to this for more details on this step
+The same image with different tags will have the same image id. Its the same image tagged differently.*/
                         bat  "docker image push  ${DOCKER_HUB_CRED_USR}/angular-nginx:${env.BUILD_NUMBER}-${env.environment}"
 
                     }
