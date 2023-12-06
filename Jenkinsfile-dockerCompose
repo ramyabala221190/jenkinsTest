@@ -39,11 +39,12 @@ pipeline {
                         echo 'Retagging image and Pushing image to DockerHub'
                         bat  "docker login -u ${DOCKER_HUB_CRED_USR} -p ${DOCKER_HUB_CRED_PSW} docker.io"
                         bat  "docker image prune --force"  /* removes all dangling images. Will not remove unused images. --force tag ensures no prompt for confirmation will be there*/
-                        bat  "docker image tag ${DOCKER_HUB_CRED_USR}/ngnix-image:latest ${DOCKER_HUB_CRED_USR}/ngnix-image:${env.BUILD_NUMBER}-${env.environment}"
+                        bat  "docker image push ${DOCKER_HUB_CRED_USR}/ngnix-image" /*to prevent the error: image does not exist when tagging the image*/
+                        bat  "docker image tag ${DOCKER_HUB_CRED_USR}/ngnix-image ${DOCKER_HUB_CRED_USR}/ngnix-image:${env.BUILD_NUMBER}-${env.environment}"
                         /*
 The same image with different tags will have the same image id. Its the same image tagged differently.
 format of the image is <username>/<image-name>:tag. If you provide no tag it is assumed to be latest*/
-                        bat  "docker image push --all-tags ${DOCKER_HUB_CRED_USR}/ngnix-image"
+                        bat  "docker image push ${DOCKER_HUB_CRED_USR}/ngnix-image:${env.BUILD_NUMBER}-${env.environment}"
 
                     }
                     post {
