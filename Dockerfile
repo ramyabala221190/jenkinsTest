@@ -39,4 +39,4 @@ COPY ./config/nginx.config /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
-CMD [/usr/sbin/nginx, '-g', 'daemon off;']
+CMD ['/usr/sbin/nginx', '-g', 'daemon off;']
