@@ -13,6 +13,6 @@ export class AppComponent {
   }
 
   ngOnInit(){
-    console.log(`App has been built using ${environment.name}`)
+    console.log(`App is being run on ${environment.name} environment`)
   }
 }
