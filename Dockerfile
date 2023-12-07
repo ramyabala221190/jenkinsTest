@@ -2,7 +2,7 @@
 #as node means you are creating an alias for this stage to be accessed in the future stages
 FROM node:alpine as node
 ARG env
-ENV CHROME_BIN="C:\Program Files\Google\Chrome\Application"
+ENV CHROME_BIN="C:/Program Files/Google/Chrome/Application/chrome.exe"
 LABEL author="Angular Enthusiast"
 LABEL devURL="http://localhost:8082"
 LABEL prodUrl="http://localhost:8083"
