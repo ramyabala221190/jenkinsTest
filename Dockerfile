@@ -2,6 +2,7 @@
 #as node means you are creating an alias for this stage to be accessed in the future stages
 FROM node:alpine as node
 ARG env
+ENV CHROME_BIN="C:\Program Files\Google\Chrome\Application"
 LABEL author="Angular Enthusiast"
 LABEL devURL="http://localhost:8082"
 LABEL prodUrl="http://localhost:8083"
@@ -18,6 +19,8 @@ RUN npm cache clean --force
 RUN npm install
 COPY . .
 #copy all the files and folders from the directory where the Dockerfile is present into the working directory i.e /app
+
+RUN npm run test
 
 RUN npm run build:${env}
 
