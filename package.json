@@ -8,7 +8,7 @@
     "build:dev": "ng build --configuration development",
     "build:common": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test --code-coverage --watch=false"
+    "test": "ng test --code-coverage --watch=false --browsers=ChromeHeadlessNoSandbox"
   },
   "private": true,
   "dependencies": {
