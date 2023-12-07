@@ -1,5 +1,5 @@
 const path=require('path');
-
+console.log(require('puppeteer').executablePath())
 process.env.CHROME_BIN=require('puppeteer').executablePath();
 module.exports = function (config) {
   config.set({
@@ -28,7 +28,7 @@ module.exports = function (config) {
     customLaunchers: {
       ChromeHeadlessNoSandbox: {
           base: 'ChromeHeadless',
-          flags: ['--no-sandbox', '--headless', '--disable-gpu', '--remote-debugging-port=9222']
+          flags: ['--no-sandbox', '--headless', '--remote-debugging-port=9222']
       }
     },
     singleRun: true
