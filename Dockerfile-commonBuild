@@ -1,12 +1,14 @@
 #Stage 1 Creating angular build(dist folder). 
 #as node means you are creating an alias for this stage to be accessed in the future stages
 FROM node:alpine as node
-ARG env="prod"
-LABEL author="AngularEnthusiast"
-RUN mkdir /app
+ARG env
+LABEL author="Angular Enthusiast"
+LABEL devURL="http://localhost:8082"
+LABEL prodUrl="http://localhost:8083"
+LABEL description="We aim to deploy the angular app to DockerHub"
+
 WORKDIR /app
 
-RUN echo ${env}
 # node is the base image from which Docker will include all functionality into the image we will be crearting
 # Its like a parent class from which we are inheriting all features into the child class
 
@@ -23,6 +25,7 @@ COPY ./src/environments/environment.${env}.ts  ./src/environments/environment.ts
 # that env's env file to the environment.prod.ts so that the correct env config info is available to the application
 
 RUN npm run build:common
+#irrespective of the envrionment, we are running using a single configuration. IN this example, we are using production configuration
 
 #Stage 2
 
@@ -43,4 +46,6 @@ COPY ./config/nginx.config /etc/nginx/conf.d/default.conf
 EXPOSE 80
 #the container will listen on port 80
 
-CMD nginx -g "daemon off;"
+CMD ["nginx", "-g", "daemon off;"] 
+#the command to be executed when the docker container starts. -g daemon off indicates that nginx must run in the foreground
+#this command must execute execute successfully. Otherwise you cannot open the application in the browser.
