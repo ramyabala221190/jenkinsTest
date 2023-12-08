@@ -14,7 +14,7 @@ WORKDIR /app
 # node is the base image from which Docker will include all functionality into the image we will be crearting
 # Its like a parent class from which we are inheriting all features into the child class
 
-COPY /package.json /package-lock.json ./
+COPY ../package.json ../package-lock.json ./
 RUN npm cache clean --force
 RUN npm install
 COPY . .
@@ -37,7 +37,7 @@ COPY --from=node /app/dist/jenkins-test /usr/share/nginx/html/
 # have added an additional check. When we are routing to other components with different paths,
 # nginx might think its a server side path and return 404. In such cases we instruct nginx to 
 # redirect to index.html file. This is very important
-COPY /config/nginx.config /etc/nginx/conf.d/default.conf
+COPY ../config/nginx.config /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
