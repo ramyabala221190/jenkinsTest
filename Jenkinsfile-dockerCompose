@@ -24,6 +24,9 @@ pipeline {
         stage('Docker Workflow') {
             stages{
                 stage('Clone') {
+                    when {
+                        environment name: 'environment', value: 'dev'
+                    }
                     steps {
                         echo 'Cloning...'
                         cleanWs() //Workspace Clean Plugin to delete the workspace before cloning and building
