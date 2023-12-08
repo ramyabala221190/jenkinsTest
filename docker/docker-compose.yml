@@ -3,7 +3,7 @@ services:
      container_name: ${containerName}
      image: ${baseImageName}
      env_file :
-       - dev.env
+       - ${environment}.env
      volumes :
        - /src/assets/runtime-environment.ts:/usr/share/nginx/assets/runtime-environment.ts
      build:
