@@ -14,6 +14,10 @@ pipeline {
         DOCKER_HUB_CRED=credentials('dockerHubRegistryCredentials') //pulling the DockerHub crendetials saved in Jenkins-->Dashboard--->Credentials
         appPort= envPortMapping(env.environment) //decide the application port based on the environment
         containerPort=80 //fix the container port
+        fromRepositoryName="angular-nginx-dev"
+        toRepositoryName="angular-nginx"+"-"+env.environment
+        containerName="angular-nginx-"+env.environment+"-container"
+        baseImageName="angular-nginx"
     }
 
     stages{
@@ -29,24 +33,59 @@ pipeline {
                 }
               
                 stage('Docker Build') {
+                     when {
+                        environment name: 'environment', value: 'dev'
+                    }
                     steps {
                         echo 'Running Docker Compose build'
                         bat  "docker compose build --build-arg env=${env.environment}"
                     }
                 }
-                stage('Docker Push') {
+
+                stage('Docker Pull and Tag Image') {
+                   when {
+                        environment name: 'environment', value: 'prod'
+                    }
                     steps{
-                        echo 'Retagging image and Pushing image to DockerHub'
+                        echo 'Pulling latest image from low enviornment repository in DockerHub'
+                        bat "docker image pull ${DOCKER_HUB_CRED_USR}/${fromRepositoryName}:latest"
+                        bat "docker image tag ${DOCKER_HUB_CRED_USR}/${fromRepositoryName} ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${env.BUILD_NUMBER}"
+                        bat "docker image tag ${DOCKER_HUB_CRED_USR}/${fromRepositoryName} ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:latest"
+
+                    }  
+                }
+
+                stage('Docker Tag Image in Dev'){
+                      when {
+                        environment name: 'environment', value: 'dev'
+                    }
+                    steps{
+                        bat  "docker image tag angular-nginx ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${env.BUILD_NUMBER}"
+                        bat  "docker image tag angular-nginx ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:latest"  
+                    }
+                }
+                stage('Docker login'){
+                    steps {
                         bat  "docker login -u ${DOCKER_HUB_CRED_USR} -p ${DOCKER_HUB_CRED_PSW} docker.io"
-                        bat  "docker image prune --force"  /* removes all dangling images. Will not remove unused images. --force tag ensures no prompt for confirmation will be there*/
-                        bat  "docker image tag angular-nginx-image ${DOCKER_HUB_CRED_USR}/angular-nginx:${env.BUILD_NUMBER}-${env.environment}"
+                        bat  "docker image prune --force"
+                    }
+                }
+                stage('Docker Push') {
+                    
+                    steps{
+                        echo 'Pushing image to DockerHub'
+                        //bat  "docker login -u ${DOCKER_HUB_CRED_USR} -p ${DOCKER_HUB_CRED_PSW} docker.io"
+                       //bat  "docker image prune --force"  /* removes all dangling images. Will not remove unused images. --force tag ensures no prompt for confirmation will be there*/
+                        // bat  "docker image tag angular-nginx ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${env.BUILD_NUMBER}"
+                        // bat  "docker image tag angular-nginx ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:latest"
                         /*
 We have built an image with the name :angular-nginx-image as specified in the docker-compose.yml. We need to tag this image to the format:
 DockerhubUsername/DockerHubRepoName/some-image-name:tag
 Not that the tagged image is pushed to the Docker hub.
 https://docs.docker.com/get-started/04_sharing_app/ Refer to this for more details on this step
 The same image with different tags will have the same image id. Its the same image tagged differently.*/
-                        bat  "docker image push  ${DOCKER_HUB_CRED_USR}/angular-nginx:${env.BUILD_NUMBER}-${env.environment}"
+                        bat  "docker image push --all-tags ${DOCKER_HUB_CRED_USR}/${toRepositoryName}"
+
 
                     }
                     post {
@@ -76,9 +115,9 @@ This will recreate if there are any existing containers with the same name. If n
 def envPortMapping(envName){
 
     if(envName.equals("dev")){
-        return 8082
+        return 8082;
     }
     else if(envName.equals("prod")) {
-        return 8083
+        return 8083;
     }
 }
