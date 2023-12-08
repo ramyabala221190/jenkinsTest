@@ -38,7 +38,7 @@ pipeline {
                     }
                     steps {
                         echo 'Running Docker Compose build'
-                        bat  "docker compose -f docker/docker-compose.yml build --build-arg env=${env.environment} --build-context misc=../"
+                        bat  "docker compose -f docker/docker-compose.yml --build-context misc=../ build --build-arg env=${env.environment}"
                     }
                 }
 
