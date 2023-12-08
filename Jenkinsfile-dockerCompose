@@ -15,8 +15,8 @@ pipeline {
         appPort= envPortMapping(env.environment) //decide the application port based on the environment
         containerPort=80 //fix the container port
         fromRepositoryName="angular-nginx-dev"
-        toRepositoryName="angular-nginx"+"-"+env.environment
-        containerName="angular-nginx-"+env.environment+"-container"
+        toRepositoryName="angular-nginx-${env.environment}"
+        containerName="angular-nginx-${env.environment}-container"
         baseImageName="angular-nginx"
     }
 
