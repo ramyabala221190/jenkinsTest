@@ -9,7 +9,7 @@ services:
      build:
         context: .
         additional_contexts:
-           misc:../
+           - misc:../
         #dockerfile: Dockerfile-commonBuild
         dockerfile: Dockerfile
      ports:
