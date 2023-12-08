@@ -8,7 +8,7 @@ services:
        - /src/assets/runtime-environment.ts:/usr/share/nginx/assets/runtime-environment.ts
      build:
         context: ../
-        #dockerfile: Dockerfile-commonBuild
+        #dockerfile: docker/Dockerfile-commonBuild
         dockerfile: docker/Dockerfile
      ports:
        - ${appPort}:${containerPort}

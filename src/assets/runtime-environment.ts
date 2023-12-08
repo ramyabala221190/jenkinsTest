@@ -1,4 +1,4 @@
 export const runtime={
-  name:"${envName}",
-  port:"${envPort}"
+  name:"${name}",
+  port:"${port}"
 }
