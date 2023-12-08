@@ -74,10 +74,6 @@ pipeline {
                     
                     steps{
                         echo 'Pushing image to DockerHub'
-                        //bat  "docker login -u ${DOCKER_HUB_CRED_USR} -p ${DOCKER_HUB_CRED_PSW} docker.io"
-                       //bat  "docker image prune --force"  /* removes all dangling images. Will not remove unused images. --force tag ensures no prompt for confirmation will be there*/
-                        // bat  "docker image tag angular-nginx ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${env.BUILD_NUMBER}"
-                        // bat  "docker image tag angular-nginx ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:latest"
                         /*
 We have built an image with the name :angular-nginx-image as specified in the docker-compose.yml. We need to tag this image to the format:
 DockerhubUsername/DockerHubRepoName/some-image-name:tag
