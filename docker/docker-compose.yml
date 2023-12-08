@@ -5,10 +5,10 @@ services:
      env_file :
        - ${environment}.env
      volumes :
-       - /src/assets/runtime-environment.ts : /usr/share/nginx/assets/runtime-environment.ts
+       - /src/assets/runtime-environment.ts:/usr/share/nginx/assets/runtime-environment.ts
      build:
         context: .
         #dockerfile: Dockerfile-commonBuild
         dockerfile: Dockerfile
      ports:
-       - ${port}:${containerPort}
+       - ${appPort}:${containerPort}
