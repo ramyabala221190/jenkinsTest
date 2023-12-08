@@ -1,3 +1,6 @@
+import * as config from '../assets/runtime-environment';
+
 export const environment = {
-    name:"PROD"
+    name:config.runtime.name,
+    port:config.runtime.port
 };

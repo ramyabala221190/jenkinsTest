@@ -2,11 +2,13 @@ services:
    nginx:
      container_name: ${containerName}
      image: ${baseImageName}
+     env_file :
+       - ${environment}.env
+     volumes :
+       - /src/assets/runtime-environment.ts : /usr/share/nginx/assets/runtime-environment.ts
      build:
         context: .
         #dockerfile: Dockerfile-commonBuild
         dockerfile: Dockerfile
      ports:
-       - ${appPort}:${containerPort}
-
-
+       - ${port}:${containerPort}
