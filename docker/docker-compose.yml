@@ -4,10 +4,8 @@ services:
      image: ${baseImageName}
      env_file :
        - ${environment}.env
-    #command: "envsubst < '$name,$port' > '/src/assets/runtime-environment.ts' && nginx -g 'daemon off;'"
-    #  command: /bin/sh -c "envsubst < '${name},${port}' > /src/assets/runtime-environment.json && nginx -g daemon off;"
-    #  volumes :
-    #    - /src/assets/runtime-environment.json:/usr/share/nginx/assets/runtime-environment.json
+     volumes :
+       - /src/environments/environment.ts:/usr/share/nginx/assets/runtime-environment.json
      build:
         context: ../
         #dockerfile: docker/Dockerfile-commonBuild
