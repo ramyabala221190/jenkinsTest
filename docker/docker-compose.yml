@@ -4,8 +4,6 @@ services:
      image: ${baseImageName}
      env_file :
        - ${environment}.env
-     volumes :
-       - /src/environments/environment.ts:/usr/share/nginx/assets/runtime-environment.json
      build:
         context: ../
         #dockerfile: docker/Dockerfile-commonBuild

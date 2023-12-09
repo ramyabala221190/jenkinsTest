@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { EnvironmentConfigService } from './environment-config.service';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +8,16 @@ import { environment } from 'src/environments/environment';
 })
 export class AppComponent {
   title:string="jenkinsTest"
-  constructor(){
+  constructor(private envConfigService:EnvironmentConfigService){
 
   }
 
   ngOnInit(){
-    console.log(`App is being run on ${environment.name} environment`)
+    let config=this.envConfigService.fetchEnvConfig();
+    if(config){
+    let environment=config.name;
+    let port=config.port;
+    console.log(`App is being run in ${environment} environment on port ${port}`);
+    }
   }
 }

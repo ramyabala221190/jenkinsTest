@@ -1,10 +1,16 @@
-import { NgModule } from '@angular/core';
+import { NgModule,APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TodosComponent } from './todos/todos.component';
 import { CommentsComponent } from './comments/comments.component';
+import { EnvironmentConfigService, environmentConfig } from './environment-config.service';
+import { Observable } from 'rxjs';
+
+function appInitialization(envConfigService:EnvironmentConfigService) :()=>Observable<environmentConfig>{
+   return ()=>envConfigService.loadConfig();
+}
 
 @NgModule({
   declarations: [
@@ -16,7 +22,14 @@ import { CommentsComponent } from './comments/comments.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide:APP_INITIALIZER,
+      useFactory:appInitialization,
+      deps:[EnvironmentConfigService],
+      multi:true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
