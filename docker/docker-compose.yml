@@ -4,7 +4,8 @@ services:
      image: ${baseImageName}
      env_file :
        - ${environment}.env
-     command: "envsubst < '$name,$port' > '/src/assets/runtime-environment.ts' && nginx -g 'daemon off;'"
+    #command: "envsubst < '$name,$port' > '/src/assets/runtime-environment.ts' && nginx -g 'daemon off;'"
+     command: bat "nginx -g 'daemon off;'"
      volumes :
        - /src/assets/runtime-environment.json:/usr/share/nginx/assets/runtime-environment.json
      build:
