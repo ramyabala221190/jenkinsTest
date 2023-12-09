@@ -10,3 +10,5 @@ export const environment = {
     name:envList.name,
     port:envList.port
 };
+
+console.log(environment)
