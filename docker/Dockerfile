@@ -44,8 +44,9 @@ COPY config/nginx.config /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
-RUN chmod +x docker/startup.sh
-ENTRYPOINT ["docker/startup.sh"]
+ADD docker/startup.sh /startup.sh
+RUN chmod +x /startup.sh
+ENTRYPOINT ["/startup.sh"]
 # ADD docker/startup.sh /startup.sh
 # CMD /startup.sh 
 # CMD ["nginx", "-g", "daemon off;"] 
