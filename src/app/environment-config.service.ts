@@ -4,7 +4,7 @@ import { Observable, of, tap } from 'rxjs';
 
 export interface environmentConfig{
   name:string,
-  port:number
+  port:number|string
 }
 
 /*
