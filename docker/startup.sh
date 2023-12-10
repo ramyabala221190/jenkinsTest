@@ -6,5 +6,5 @@ echo "Starting application..."
 
 tmpfile=$(mktemp)
 cp "/usr/share/nginx/html/assets/runtime-environment.json" $tmpfile
-envsubst > $tmpfile && mv $tmpfile "/usr/share/nginx/html/assets/runtime-environment.json"
+envsubst < $tmpfile > "/usr/share/nginx/html/assets/runtime-environment.json"
 nginx -g 'daemon off;'
