@@ -3,8 +3,7 @@ echo "Starting application..."
 # echo "port = ${port}"
 # envsubst < "/usr/share/nginx/html/assets/runtime-environment.json" | sponge "/usr/share/nginx/html/assets/runtime-environment.json"
 #envsubst '$name,$port' < "/usr/share/nginx/html/assets/runtime-environment.json"
-
 tmpfile=$(mktemp)
 cp "/usr/share/nginx/html/assets/runtime-environment.json" $tmpfile
-envsubst < $tmpfile > "/usr/share/nginx/html/assets/runtime-environment.json"
+envsubst '$name,$port' < $tmpfile  && mv $tmpfile "/usr/share/nginx/html/assets/runtime-environment.json"
 nginx -g 'daemon off;'
