@@ -16,6 +16,7 @@ WORKDIR /app
 
 COPY package.json package-lock.json ./
 RUN npm cache clean --force
+RUN npm install -g envsub
 RUN npm install
 COPY . .
 #copy all the files and folders from the directory where the Dockerfile is present into the working directory i.e /app
