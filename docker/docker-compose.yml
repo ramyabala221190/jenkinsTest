@@ -4,6 +4,7 @@ services:
      image: ${baseImageName}
      env_file :
        - ${environment}.env
+     command : ["nginx", "-g", "daemon off;"] 
      build:
         context: ../
         #dockerfile: docker/Dockerfile-commonBuild
