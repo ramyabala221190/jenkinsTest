@@ -5,6 +5,6 @@ echo "Starting application..."
 #envsubst '$name,$port' < "/usr/share/nginx/html/assets/runtime-environment.json"
 
 tmpfile=$(mktemp)
-cp -p /usr/share/nginx/html/assets/runtime-environment.json $tmpfile
-envsubst > $tmpfile && mv $tmpfile /usr/share/nginx/html/assets/runtime-environment.json
+cp "/usr/share/nginx/html/assets/runtime-environment.json" $tmpfile
+envsubst > $tmpfile && mv $tmpfile "/usr/share/nginx/html/assets/runtime-environment.json"
 nginx -g 'daemon off;'
