@@ -1,4 +1,4 @@
-#!/bin/bash
+
 echo "Starting application..."
 echo "name = ${name}"
 echo "port = ${port}"
