@@ -1,4 +1,3 @@
-#!/bin/sh
 echo "Starting application..."
 echo "name = ${name}"
 echo "port = ${port}"
