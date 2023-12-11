@@ -1,4 +1,4 @@
-echo "Starting application..."
+echo "Starting Container..."
 echo "name = ${name}"
 echo "port = ${port}"
 # envsubst < "/usr/share/nginx/html/assets/runtime-environment.json" | sponge "/usr/share/nginx/html/assets/runtime-environment.json"
@@ -8,5 +8,5 @@ echo "port = ${port}"
 # cp "/usr/share/nginx/html/assets/runtime-environment.json" $tmpfile
 # envsubst '$name,$port' < $tmpfile  && mv $tmpfile "/usr/share/nginx/html/assets/runtime-environment.json"
 
-# envsub "/usr/share/nginx/html/assets/runtime-environment.js"
+envsub "/usr/share/nginx/html/assets/runtime-environment.js"
 nginx -g 'daemon off;'

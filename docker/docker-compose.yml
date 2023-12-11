@@ -4,6 +4,7 @@ services:
      image: ${baseImageName}
      env_file :
        - ${environ}.env # available only at run time
+     command : /startup.sh
      build:
         args:  #these args are available during build time
            - env=${environ}
