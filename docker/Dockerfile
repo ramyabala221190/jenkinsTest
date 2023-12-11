@@ -42,7 +42,7 @@ COPY --from=node /app/dist/jenkins-test /usr/share/nginx/html/
 # redirect to index.html file. This is very important
 COPY config/nginx.config /etc/nginx/conf.d/default.conf
 
-RUN envsub "/usr/share/nginx/html/assets/runtime-environment.js"
+RUN --from=node envsub /usr/share/nginx/html/assets/runtime-environment.js
 
 EXPOSE 80
 
