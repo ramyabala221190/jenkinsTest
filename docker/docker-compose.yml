@@ -6,11 +6,11 @@ services:
        - ${environment}.env
     #  command : ["nginx", "-g", "daemon off;"] 
      build:
+        args:
+           - name
+           - port
         context: ../
         #dockerfile: docker/Dockerfile-commonBuild
         dockerfile: docker/Dockerfile
-        args:
-           name:${name}
-           port:${port}
      ports:
        - ${appPort}:${containerPort}
