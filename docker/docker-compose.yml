@@ -3,10 +3,10 @@ services:
      container_name: ${containerName}
      image: ${baseImageName}
      env_file :
-       - ${env}.env # available only at run time
+       - ${environ}.env # available only at run time
      build:
         args:  #these args are available during build time
-           - env=${env}
+           - env=${environ}
            - port=${appPort}
         context: ../
         #dockerfile: docker/Dockerfile-commonBuild

@@ -12,8 +12,8 @@ pipeline {
 
     environment{
         DOCKER_HUB_CRED=credentials('dockerHubRegistryCredentials') //pulling the DockerHub crendetials saved in Jenkins-->Dashboard--->Credentials
-        env="${env.environment}" //environment info from pipeline input
-        appPort= envPortMapping(env.environment) //decide the application port based on the environment
+        environ="${env.environment}" //environment info from pipeline input
+        appPort=envPortMapping(env.environment) //decide the application port based on the environment
         containerPort=80 //fix the container port
         fromRepositoryName="angular-nginx-dev"
         toRepositoryName="angular-nginx-${env.environment}"
