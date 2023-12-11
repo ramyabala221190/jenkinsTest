@@ -8,6 +8,8 @@ LABEL devURL="http://localhost:8082"
 LABEL prodUrl="http://localhost:8083"
 LABEL description="We aim to deploy the angular app to DockerHub"
 
+RUN rm -r /app/*
+
 WORKDIR /app
 #WORKDIR will create the app directory if it doesnt already exist
 
@@ -23,6 +25,7 @@ COPY . .
 
 RUN envsub src/assets/runtime-environment.js
 
+RUN cat src/assets/runtime-environment.js
 
 #RUN npm run test
 RUN npm run build:${env}
