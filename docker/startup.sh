@@ -1,3 +1,4 @@
+#!/bin/sh
 echo "Starting Container..."
 echo "name = ${name}"
 echo "port = ${port}"
