@@ -11,6 +11,12 @@ LABEL prodUrl="http://localhost:8083"
 LABEL description="We aim to deploy the angular app to DockerHub"
 
 WORKDIR /app
+
+RUN echo "name= ${name}"
+RUN echo "name= ${port}"
+
+RUN echo "name: $name"
+RUN echo "port: $port"
 #WORKDIR will create the app directory if it doesnt already exist
 
 # node is the base image from which Docker will include all functionality into the image we will be crearting
