@@ -52,10 +52,12 @@ COPY --from=node /app/dist/jenkins-test /usr/share/nginx/html/
 # redirect to index.html file. This is very important
 COPY config/nginx.config /etc/nginx/conf.d/default.conf
 
+RUN --from=node node_modules/envsub /usr/share/nginx/html/assets/runtime-environment.json
+
 EXPOSE 80
 
-ADD docker/startup.sh /startup.sh
-CMD /startup.sh 
-# CMD ["nginx", "-g", "daemon off;"] 
+# ADD docker/startup.sh /startup.sh
+# CMD /startup.sh 
+CMD ["nginx", "-g", "daemon off;"] 
 #the command to be executed when the docker container starts. -g daemon off indicates that nginx must run in the foreground
 #this command must execute execute successfully. Otherwise you cannot open the application in the browser.

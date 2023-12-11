@@ -7,5 +7,4 @@ echo "port = ${port}"
 # tmpfile=$(mktemp)
 # cp "/usr/share/nginx/html/assets/runtime-environment.json" $tmpfile
 # envsubst '$name,$port' < $tmpfile  && mv $tmpfile "/usr/share/nginx/html/assets/runtime-environment.json"
-
 nginx -g 'daemon off;'
