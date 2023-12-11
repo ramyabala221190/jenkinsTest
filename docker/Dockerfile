@@ -21,6 +21,9 @@ RUN npm install
 COPY . .
 #copy all the files and folders from the directory where the Dockerfile is present into the working directory i.e /app
 
+RUN envsub src/assets/runtime-environment.js
+
+
 #RUN npm run test
 RUN npm run build:${env}
 
@@ -41,8 +44,6 @@ COPY --from=node /app/dist/jenkins-test /usr/share/nginx/html/
 # nginx might think its a server side path and return 404. In such cases we instruct nginx to 
 # redirect to index.html file. This is very important
 COPY config/nginx.config /etc/nginx/conf.d/default.conf
-
-RUN --from=node envsub /usr/share/nginx/html/assets/runtime-environment.js
 
 EXPOSE 80
 
