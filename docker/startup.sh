@@ -9,5 +9,4 @@ echo "port = ${port}"
 # envsubst '$name,$port' < $tmpfile  && mv $tmpfile "/usr/share/nginx/html/assets/runtime-environment.json"
 
 # envsub "/usr/share/nginx/html/assets/runtime-environment.js"
-ls .
 nginx -g 'daemon off;'

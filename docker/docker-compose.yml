@@ -3,11 +3,11 @@ services:
      container_name: ${containerName}
      image: ${baseImageName}
      env_file :
-       - ${environment}.env
+       - ${environment}.env # available only at run time
      build:
         args:
-           - name=${name}
-           - port=${port}
+           - name=DEV
+           - port=8082
         context: ../
         #dockerfile: docker/Dockerfile-commonBuild
         dockerfile: docker/Dockerfile
