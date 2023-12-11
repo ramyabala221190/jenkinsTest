@@ -4,7 +4,9 @@ services:
      image: ${baseImageName}
      env_file :
        - ${environment}.env
-    #  command : ["nginx", "-g", "daemon off;"] 
+     environment:
+        - name=${name}
+        - port=${port}
      build:
         args:
            - name

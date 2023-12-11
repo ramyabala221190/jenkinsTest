@@ -1,9 +1,9 @@
+
 #Stage 1 Creating angular build(dist folder). 
 #as node means you are creating an alias for this stage to be accessed in the future stages
+
 FROM node:alpine as node
 ARG env
-ARG name
-ARG port
 #ENV CHROME_BIN="C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
 LABEL author="Angular Enthusiast"
 LABEL devURL="http://localhost:8082"
@@ -12,8 +12,7 @@ LABEL description="We aim to deploy the angular app to DockerHub"
 
 WORKDIR /app
 
-RUN echo "name= ${name}"
-RUN echo "name= ${port}"
+
 
 RUN echo "name: $name"
 RUN echo "port: $port"
