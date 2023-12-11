@@ -3,7 +3,7 @@ import * as envConfig from '../assets/runtime-environment.js'
 import { Observable, of, tap } from 'rxjs';
 
 export interface environmentConfig{
-  name:string,
+  env:string,
   port:number|string
 }
 
@@ -27,7 +27,7 @@ export class EnvironmentConfigService {
   constructor() { }
 
   private envConfigList:environmentConfig={
-    name:"",
+    env:"",
     port:0
   };
 

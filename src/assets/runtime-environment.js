@@ -1,5 +1,5 @@
 
 module.exports={
-  "name":"${name}",
+  "env":"${env}",
   "port":"${port}"
 }

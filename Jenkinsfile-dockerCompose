@@ -12,6 +12,7 @@ pipeline {
 
     environment{
         DOCKER_HUB_CRED=credentials('dockerHubRegistryCredentials') //pulling the DockerHub crendetials saved in Jenkins-->Dashboard--->Credentials
+        env=env.environment //environment info from pipeline input
         appPort= envPortMapping(env.environment) //decide the application port based on the environment
         containerPort=80 //fix the container port
         fromRepositoryName="angular-nginx-dev"
@@ -38,7 +39,7 @@ pipeline {
                     }
                     steps {
                         echo 'Running Docker Compose build'
-                        bat  "docker compose -f docker/docker-compose.yml build --build-arg env=${env.environment}"
+                        bat  "docker compose -f docker/docker-compose.yml build"
                     }
                 }
 

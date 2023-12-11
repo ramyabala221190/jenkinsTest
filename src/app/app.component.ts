@@ -15,7 +15,7 @@ export class AppComponent {
   ngOnInit(){
     let config=this.envConfigService.fetchEnvConfig();
     if(config){
-    let environment=config.name;
+    let environment=config.env;
     let port=config.port;
     console.log(`App is being run in ${environment} environment on port ${port}`);
     }
