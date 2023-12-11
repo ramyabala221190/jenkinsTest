@@ -4,13 +4,10 @@ services:
      image: ${baseImageName}
      env_file :
        - ${environment}.env
-     environment:
-        - name=${name}
-        - port=${port}
      build:
         args:
-           - name
-           - port
+           - name=${name}
+           - port=${port}
         context: ../
         #dockerfile: docker/Dockerfile-commonBuild
         dockerfile: docker/Dockerfile

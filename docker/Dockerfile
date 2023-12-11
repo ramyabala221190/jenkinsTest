@@ -4,6 +4,10 @@
 
 FROM node:alpine as node
 ARG env
+ARG name
+ARG port
+ENV ENV_NAME ${name}
+ENV ENV_PORT ${port}
 #ENV CHROME_BIN="C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
 LABEL author="Angular Enthusiast"
 LABEL devURL="http://localhost:8082"
@@ -14,8 +18,8 @@ WORKDIR /app
 
 
 
-RUN echo "name: $name"
-RUN echo "port: $port"
+RUN echo "name: $ENV_NAME"
+RUN echo "port: $ENV_PORT"
 #WORKDIR will create the app directory if it doesnt already exist
 
 # node is the base image from which Docker will include all functionality into the image we will be crearting
