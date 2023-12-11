@@ -34,7 +34,7 @@ COPY . .
 #RUN npm run test
 RUN npm run build:${env}
 
-CMD ["npm"]
+CMD [node_modules/envsub]
 
 #Stage 2
 
@@ -58,7 +58,8 @@ EXPOSE 80
 
 # ADD docker/startup.sh /startup.sh
 # CMD /startup.sh 
-CMD ["nginx", "-g", "daemon off; "] 
+ENTRYPOINT [ "/startup.sh" ]
+#CMD ["nginx", "-g", "daemon off; "] 
 # ENTRYPOINT  npm run envsub /usr/share/nginx/html/assets/runtime-environment.json && nginx -g daemon off;
 #the command to be executed when the docker container starts. -g daemon off indicates that nginx must run in the foreground
 #this command must execute execute successfully. Otherwise you cannot open the application in the browser.
