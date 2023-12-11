@@ -34,6 +34,8 @@ RUN cat src/assets/runtime-environment.js
 #RUN npm run test
 RUN npm run build:${env}
 
+CMD ["npm"]
+
 #Stage 2
 
 FROM nginx:alpine
@@ -52,12 +54,11 @@ COPY --from=node /app/dist/jenkins-test /usr/share/nginx/html/
 # redirect to index.html file. This is very important
 COPY config/nginx.config /etc/nginx/conf.d/default.conf
 
-RUN --from=node node_modules/envsub /usr/share/nginx/html/assets/runtime-environment.json
-
 EXPOSE 80
 
 # ADD docker/startup.sh /startup.sh
 # CMD /startup.sh 
-CMD ["nginx", "-g", "daemon off;"] 
+#CMD ["nginx", "-g", "daemon off; "] 
+ENTRYPOINT  npm run envsub /usr/share/nginx/html/assets/runtime-environment.json && nginx -g daemon off;
 #the command to be executed when the docker container starts. -g daemon off indicates that nginx must run in the foreground
 #this command must execute execute successfully. Otherwise you cannot open the application in the browser.
