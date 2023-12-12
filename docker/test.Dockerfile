@@ -36,7 +36,7 @@ RUN npm run build:${env}
 ADD docker/startnode.js /startnode.js
 RUN chmod +x /startnode.js
 
-ENTRYPOINT ["node","/startup.js"]
+ENTRYPOINT ["npm run envsub"]
 
 #CMD ["sh", "-c","envsub","/usr/share/nginx/html/assets/runtime-environment.js"]
 # CMD [ "echo", "Default argument from CMD instruction"]

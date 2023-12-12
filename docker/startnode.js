@@ -1,5 +1,6 @@
-module.exports={
-    
-}
 
-console.log("Hello World")
+
+module.exports={
+  a: "Hello",
+  b: "World"
+}
