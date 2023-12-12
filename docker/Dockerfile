@@ -64,7 +64,7 @@ RUN chmod +x /startnode.js
 # RUN chmod +x /startup.sh
 #CMD /startup.sh 
 #CMD [ "echo", "Default argument from CMD instruction"]
-ENTRYPOINT ["/usr/bin/env node","/startup.sh"]
+ENTRYPOINT ["/usr/bin/node","/startup.js"]
 # ENTRYPOINT  npm run envsub /usr/share/nginx/html/assets/runtime-environment.json && nginx -g daemon off;
 #the command to be executed when the docker container starts. -g daemon off indicates that nginx must run in the foreground
 #this command must execute execute successfully. Otherwise you cannot open the application in the browser.
