@@ -34,7 +34,7 @@ COPY . .
 #RUN npm run test
 RUN npm run build:${env}
 
-CMD [node_modules/envsub]
+# CMD [node_modules/envsub]
 
 #Stage 2
 
@@ -58,8 +58,9 @@ EXPOSE 80
 
 ADD docker/startup.sh /startup.sh
 RUN chmod +x /startup.sh
-# CMD /startup.sh 
-ENTRYPOINT [ "/startup.sh" ]
+#CMD /startup.sh 
+ENTRYPOINT ["sh","/startup.sh"]
+CMD ["nginx", "-g", "daemon off;"]
 #CMD ["nginx", "-g", "daemon off; "] 
 # ENTRYPOINT  npm run envsub /usr/share/nginx/html/assets/runtime-environment.json && nginx -g daemon off;
 #the command to be executed when the docker container starts. -g daemon off indicates that nginx must run in the foreground
