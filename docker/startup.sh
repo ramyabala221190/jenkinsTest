@@ -2,7 +2,7 @@
 echo "Starting Container..."
 echo "env = ${env}"
 echo "port = ${port}"
-replaceValue=''
+replaceValue= "${env}"
 replaceWith="prod"
 str="$(< /usr/share/nginx/html/assets/runtime-environment.js)"
 newStr=${str//$replaceValue/$replaceWith}
