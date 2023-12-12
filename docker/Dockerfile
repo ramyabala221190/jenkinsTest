@@ -30,7 +30,7 @@ COPY . .
 
 # RUN cat src/assets/runtime-environment.js
 
-COPY node_modules/envsub /tmp/build/
+COPY /app/node_modules/envsub /tmp/build/
 
 RUN cat /tmp/build/
 
