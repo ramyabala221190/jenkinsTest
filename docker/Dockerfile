@@ -4,7 +4,6 @@
 
 FROM node:alpine as node
 ARG env
-ARG name
 ARG port
 
 #ENV CHROME_BIN="C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
