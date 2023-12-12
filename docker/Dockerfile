@@ -33,7 +33,7 @@ COPY . .
 #RUN npm run test
 RUN npm run build:${env}
 
-CMD ["envsub"]
+CMD envsub
 
 #Stage 2
 
