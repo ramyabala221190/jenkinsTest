@@ -24,13 +24,14 @@ RUN npm cache clean --force
 RUN npm install -g envsub
 RUN npm install
 RUN echo ls .
-COPY node_modules /tmp/build/
 COPY . .
 #copy all the files and folders from the directory where the Dockerfile is present into the working directory i.e /app
 
 # RUN envsub src/assets/runtime-environment.js
 
 # RUN cat src/assets/runtime-environment.js
+
+COPY /app/node_modules /tmp/build/
 
 RUN cat /tmp/build/
 
