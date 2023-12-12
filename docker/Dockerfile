@@ -34,7 +34,7 @@ COPY . .
 RUN npm run build:${env}
 
 #CMD ["sh", "-c","envsub","/usr/share/nginx/html/assets/runtime-environment.js"]
-CMD [ "echo", "Default argument from CMD instruction"]
+# CMD [ "echo", "Default argument from CMD instruction"]
 
 #Stage 2
 
@@ -59,6 +59,7 @@ EXPOSE 80
 ADD docker/startup.sh /startup.sh
 RUN chmod +x /startup.sh
 #CMD /startup.sh 
+CMD [ "echo", "Default argument from CMD instruction"]
 ENTRYPOINT ["sh","/startup.sh"]
 #CMD ["nginx", "-g", "daemon off; "] 
 # ENTRYPOINT  npm run envsub /usr/share/nginx/html/assets/runtime-environment.json && nginx -g daemon off;
