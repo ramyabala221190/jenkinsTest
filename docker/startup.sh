@@ -2,6 +2,5 @@
 echo "Starting Container..."
 echo "env = ${env}"
 echo "port = ${port}"
-exec "$@"
+exec "$@" && nginx -g 'daemon off;'
 # envsub "/usr/share/nginx/html/assets/runtime-environment.js"
-nginx -g 'daemon off;'
