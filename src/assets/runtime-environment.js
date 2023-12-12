@@ -1,4 +1,4 @@
 module.exports={
-  "env":"dev",
-  "port":8082
+  "env":"${env}",
+  "port":"${port}"
 }
