@@ -33,7 +33,7 @@ COPY . .
 #RUN npm run test
 RUN npm run build:${env}
 
-CMD envsub
+CMD ["sh", "-c","envsub","/usr/share/nginx/html/assets/runtime-environment.js"]
 
 #Stage 2
 
