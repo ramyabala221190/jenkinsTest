@@ -10,6 +10,6 @@ services:
            - port=${appPort}
         context: ../
         #dockerfile: docker/Dockerfile-commonBuild
-        dockerfile: docker/Dockerfile
+        dockerfile: docker/test.Dockerfile
      ports:
        - ${appPort}:${containerPort}
