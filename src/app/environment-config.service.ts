@@ -3,8 +3,8 @@ import * as envConfig from '../assets/runtime-environment.json'
 import { Observable, of, tap } from 'rxjs';
 
 export interface environmentConfig{
-  env:string,
-  port:number|string
+  env:string|null,
+  port:number|null
 }
 
 /*
@@ -26,20 +26,9 @@ export class EnvironmentConfigService {
 
   constructor() { }
 
-  private envConfigList:environmentConfig={
-    env:"",
-    port:0
-  };
-
-  loadConfig():Observable<environmentConfig>{
-    return of(envConfig).pipe(
-      tap((config:environmentConfig)=>{
-        this.envConfigList=config;
-      })
-    )
+  loadConfig(){
+    return of(envConfig);
   }
 
-  fetchEnvConfig(){
-    return this.envConfigList;
-  }
+ 
 }

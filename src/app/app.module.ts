@@ -8,7 +8,7 @@ import { CommentsComponent } from './comments/comments.component';
 import { EnvironmentConfigService, environmentConfig } from './environment-config.service';
 import { Observable } from 'rxjs';
 
-function appInitialization(envConfigService:EnvironmentConfigService) :()=>Observable<environmentConfig>{
+function appInitialization(envConfigService:EnvironmentConfigService) :()=>Observable<any>{
    return ()=>envConfigService.loadConfig();
 }
 
