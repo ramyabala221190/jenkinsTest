@@ -3,7 +3,7 @@ echo "Starting Container..."
 echo "env = ${env}"
 echo "port = ${port}"
 original="$(cat /usr/share/nginx/html/assets/runtime-environment.json)"
-envUpdatedStr=${original//"'dev'"/"${env}"} 
-portUpdatedString=${envUpdatedStr//"'8082'"/"${port}"}
-echo "${portUpdatedString}"
+envUpdatedStr="${original//"dev"/"${env}"}"
+portUpdatedString="${envUpdatedStr//8082/"${port}"}"
+echo "${portUpdatedString}" > /usr/share/nginx/html/assets/runtime-environment.json
 nginx -g 'daemon off;'
