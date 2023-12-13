@@ -32,9 +32,6 @@ RUN cat src/assets/runtime-environment.json
 #RUN npm run test
 RUN npm run build:${env}
 
-#CMD ["sh", "-c","envsub","/usr/share/nginx/html/assets/runtime-environment.js"]
-# CMD [ "echo", "Default argument from CMD instruction"]
-
 #Stage 2
 
 FROM nginx:alpine
