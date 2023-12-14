@@ -2,7 +2,7 @@
 echo "Starting Container..."
 echo "env = ${env}"
 echo "port = ${port}"
-destFile=/usr/share/nginx/html/assets/runtime-environment.json
+destFile="/usr/share/nginx/html/assets/runtime-environment.json"
 original="$(cat "${destFile}")"
 envUpdatedStr="${original//"dev"/"${env}"}"
 echo "${envUpdatedStr}"
