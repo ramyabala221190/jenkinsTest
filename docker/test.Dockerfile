@@ -24,7 +24,7 @@ RUN npm install -g envsub
 RUN npm install
 COPY . .
 
-ADD docker/subst.sh /subst.sh
-RUN chmod +x /subst.sh
+ADD docker/subst.sh ./subst.sh
+RUN chmod +x ./subst.sh
 
-CMD /subst.sh
+ENTRYPOINT [ "sh","./subst.sh" ]
