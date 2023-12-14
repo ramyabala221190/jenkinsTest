@@ -9,7 +9,7 @@
     "build:common": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test  --watch=false --browsers=ChromeHeadlessNoSandbox",
-    "envsub": "envsub src/assets/runtime-environment.js"
+    "envsub": "envsub src/assets/runtime-environment.json"
   },
   "private": true,
   "dependencies": {
