@@ -67,8 +67,8 @@ pipeline {
                 }
                 stage('Docker login'){
                     steps {
-                        bat  "docker login -u ${DOCKER_HUB_CRED_USR} -p ${DOCKER_HUB_CRED_PSW} docker.io"
-                        bat  "docker image prune --force"
+                       // bat  "docker login -u ${DOCKER_HUB_CRED_USR} -p ${DOCKER_HUB_CRED_PSW} docker.io"
+                       // bat  "docker image prune --force"
                     }
                 }
                 stage('Docker Push') {
@@ -81,7 +81,7 @@ DockerhubUsername/DockerHubRepoName/some-image-name:tag
 Not that the tagged image is pushed to the Docker hub.
 https://docs.docker.com/get-started/04_sharing_app/ Refer to this for more details on this step
 The same image with different tags will have the same image id. Its the same image tagged differently.*/
-                        bat  "docker image push --all-tags ${DOCKER_HUB_CRED_USR}/${toRepositoryName}"
+                        //bat  "docker image push --all-tags ${DOCKER_HUB_CRED_USR}/${toRepositoryName}"
 
 
                     }
