@@ -1,5 +1,7 @@
+FROM puppeteer:16.1.0 as puppeteer
+#stage 1
 
-#Stage 1 Creating angular build(dist folder). 
+#Stage 2 Creating angular build(dist folder). 
 #as node means you are creating an alias for this stage to be accessed in the future stages
 
 FROM node:alpine as node
@@ -27,7 +29,7 @@ RUN npm install
 COPY . .
 #copy all the files and folders from the directory where the Dockerfile is present into the working directory i.e /app
 
-#RUN npm run test
+RUN --from=puppeteer npm run test
 
 RUN npm run build
 #Stage 2
