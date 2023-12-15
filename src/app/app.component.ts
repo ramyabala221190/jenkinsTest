@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { EnvironmentConfigService } from './environment-config.service';
+import { EnvironmentConfigService, environmentConfig } from './environment-config.service';
 
 @Component({
   selector: 'app-root',
@@ -13,13 +13,7 @@ export class AppComponent {
   }
 
   ngOnInit(){
-    this.envConfigService.fetchEnvConfig().subscribe(
-      (config:any)=>{
-          let environment=config.env;
-          let port=config.port;
-          console.log(`App is being run in ${environment} environment on port ${port}`);
-    }
-    );
-   
+    let config:environmentConfig=this.envConfigService.fetchEnvConfig();
+    console.log(`App is being run in ${config.env} environment on port ${config.port}`);
     }
 }

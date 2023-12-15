@@ -1,5 +1,5 @@
 #!/bin/bash
 echo "Starting Container..."
-echo "env = ${env}"
-echo "port = ${port}"
+echo "Runtime arguments: env = ${env}"
+echo "Runtime arguments: port = ${port}"
 nginx -g 'daemon off;'

@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, tap } from 'rxjs';
 
+export interface environmentConfig{
+  env:string|null,
+  port:number|null
+}
+
 /*
 Set the below in tsconfig.json to import the json into the .ts file
  "esModuleInterop":true,
@@ -19,7 +24,10 @@ Set the below in tsconfig.json to import the json into the .ts file
 export class EnvironmentConfigService {
 
   constructor() { }
-  envConfig:any;
+  envConfig:environmentConfig={
+    env:null,
+    port:null
+  }
 
   loadConfig(){
     this.envConfig=$ENV;
