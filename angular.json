@@ -20,7 +20,7 @@
             "outputPath": "dist/jenkins-test",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "path": "./custom-webpack.config.js",
+            "path": "custom-webpack.config.js",
             "replaceDuplicatePlugins": true,
             "polyfills": [
               "zone.js"
