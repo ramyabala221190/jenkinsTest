@@ -22,7 +22,8 @@ WORKDIR /app
 # Its like a parent class from which we are inheriting all features into the child class
 
 COPY package.json package-lock.json ./
-RUN npm cache clean --force && npm install
+RUN npm cache clean --force
+RUN npm install
 COPY . .
 #copy all the files and folders from the directory where the Dockerfile is present into the working directory i.e /app
 
