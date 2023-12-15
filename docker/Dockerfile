@@ -29,7 +29,6 @@ COPY . .
 #RUN npm run test
 
 RUN npm run build
-
 #Stage 2
 
 FROM nginx:alpine
