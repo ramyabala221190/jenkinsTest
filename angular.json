@@ -20,7 +20,6 @@
             "outputPath": "dist/jenkins-test",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "path": "custom-webpack.config.js",
             "replaceDuplicatePlugins": true,
             "polyfills": [
               "zone.js"
@@ -34,8 +33,10 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
-                    },
+            "scripts": [
+              "custom-webpack.config.js"
+            ]
+            },
           "configurations": {
             "production": {
               "budgets": [
