@@ -15,11 +15,13 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "outputPath": "dist/jenkins-test",
             "index": "src/index.html",
             "main": "src/main.ts",
+            "path": "./custom-webpack.config.js",
+            "replaceDuplicatePlugins": true,
             "polyfills": [
               "zone.js"
             ],
