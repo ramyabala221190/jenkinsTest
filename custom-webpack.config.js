@@ -9,10 +9,6 @@ require('dotenv').config()
 // customize your build beyond what Angular provides.
 module.exports = {
   plugins: [
-    new EnvironmentPlugin([
-      // Insert the keys to your environment variables here.
-      // Eg: APP_API_ENDPOINT="http://localhost:3000/api/v1"
-      'env','port'
-    ])
+    new EnvironmentPlugin(['env','port'])
 ]
 }
