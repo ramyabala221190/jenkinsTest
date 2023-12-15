@@ -19,7 +19,7 @@
           "options": {
             "outputPath": "dist/jenkins-test",
             "customWebpackConfig": {
-              "path": "./custom-webpack.config.js"
+              "path": "src/assets/custom-webpack.config.js"
             },
             "index": "src/index.html",
             "main": "src/main.ts",
