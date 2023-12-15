@@ -1,11 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as envConfig from '../assets/runtime-environment.json'
 import { Observable, of, tap } from 'rxjs';
-
-export interface environmentConfig{
-  env:string|null,
-  port:number|null
-}
 
 /*
 Set the below in tsconfig.json to import the json into the .ts file
@@ -25,10 +19,15 @@ Set the below in tsconfig.json to import the json into the .ts file
 export class EnvironmentConfigService {
 
   constructor() { }
+  envConfig:any;
 
   loadConfig(){
-    console.log($ENV)
-    return of(envConfig);
+    this.envConfig=$ENV;
+    return of(true)
+  }
+
+  fetchEnvConfig(){
+    return this.envConfig;
   }
 
  

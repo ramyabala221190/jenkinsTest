@@ -13,13 +13,11 @@ export class AppComponent {
   }
 
   ngOnInit(){
-    this.envConfigService.loadConfig().subscribe(
-      config=>{
-        if(config){
+    this.envConfigService.fetchEnvConfig().subscribe(
+      (config:any)=>{
           let environment=config.env;
           let port=config.port;
           console.log(`App is being run in ${environment} environment on port ${port}`);
-      }
     }
     );
    
