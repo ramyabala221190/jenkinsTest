@@ -27,7 +27,7 @@ export class EnvironmentConfigService {
   constructor() { }
 
   loadConfig(){
-    console.log(process.env)
+    console.log($ENV)
     return of(envConfig);
   }
 

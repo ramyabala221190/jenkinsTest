@@ -19,9 +19,7 @@
           "options": {
             "outputPath": "dist/jenkins-test",
             "customWebpackConfig": {
-              "mergeRules": {
-                "externals": "replace"
-              }
+              "path": "./custom-webpack.config.js"
             },
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -54,10 +52,8 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all",
-              "customWebpackConfig": {
-                "path": "./custom-webpack.config.js"
-              }
+              "outputHashing": "all"
+             
             },
             "development": {
               "buildOptimizer": false,
@@ -71,10 +67,7 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.dev.ts"
                 }
-              ],
-              "customWebpackConfig": {
-                "path": "./custom-webpack.config.js"
-              }
+              ]
             }
           },
           "defaultConfiguration": "production"

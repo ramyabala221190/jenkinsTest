@@ -1,12 +1,12 @@
-import { EnvironmentPlugin } from 'webpack';
-import { config } from 'dotenv';
+const webpack = require('webpack');
 
-config();
-// Export a configuration object
-// See [Wepack's documentation](https://webpack.js.org/configuration/) for additional ideas of how to 
-// customize your build beyond what Angular provides.
 module.exports = {
   plugins: [
-    new EnvironmentPlugin(['env','port'])
-]
-}
+    new webpack.DefinePlugin({
+      $ENV: {
+        env: JSON.stringify(process.env.env),
+        port: JSON.stringify(process.env.port),
+      }
+    })
+  ]
+};
