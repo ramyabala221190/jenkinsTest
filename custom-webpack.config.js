@@ -1,9 +1,7 @@
-const { EnvironmentPlugin } = require('webpack');
-// Add additional requirements here
+import { EnvironmentPlugin } from 'webpack';
+import { config } from 'dotenv';
 
-// If you're using dotenv
-require('dotenv').config()
-
+config();
 // Export a configuration object
 // See [Wepack's documentation](https://webpack.js.org/configuration/) for additional ideas of how to 
 // customize your build beyond what Angular provides.
