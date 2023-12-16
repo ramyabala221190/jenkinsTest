@@ -40,7 +40,7 @@ pipeline {
                     steps {
                         echo 'Running Docker Compose build'
                         //bat  "docker compose -f docker/docker-compose.yml build"
-                        bat "docker build ../ -f docker/Dockerfile --build-arg env='dev' --build-arg port=8082"
+                        bat "docker build . -f docker/Dockerfile --build-arg env='dev' --build-arg port=8082"
                     }
                 }
 
