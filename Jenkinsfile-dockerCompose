@@ -99,7 +99,7 @@ The same image with different tags will have the same image id. Its the same ima
                         echo 'Running Docker Compose Up'
                         script{
                             bat "docker compose -f docker/docker-compose.yml up -d --force-recreate" //- d ensures it runs in deatched mode
-                            bat "docker cp docker/${env.environment}.config.json ${containerName}:/usr/share/nginx/html/assets/runtime-environment.json"
+                            //bat "docker cp docker/${env.environment}.config.json ${containerName}:/usr/share/nginx/html/assets/runtime-environment.json"
                             /*
 This will recreate if there are any existing containers with the same name. If not it will create new containers
                             */
