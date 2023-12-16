@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, tap } from 'rxjs';
-import * as envconfig from '../assets/config.json';
+import {HttpClient} from '@angular/common/http'
+import { map, tap } from 'rxjs';
+import { HammerGestureConfig } from '@angular/platform-browser';
+
 
 export interface environmentConfig{
   env:string|null,
@@ -24,16 +26,19 @@ Set the below in tsconfig.json to import the json into the .ts file
 })
 export class EnvironmentConfigService {
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
   envConfig:environmentConfig={
     env:null,
     port:null
   }
 
   loadConfig(){
-    console.log(envconfig)
-    this.envConfig=envconfig
-    return of(true)
+     return this.http.get('../assets/config.json').pipe(
+      tap((config:any)=>{
+        console.log(config);
+          this.envConfig=config;
+      })
+     )
   }
 
   fetchEnvConfig(){
