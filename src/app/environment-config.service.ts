@@ -32,7 +32,7 @@ export class EnvironmentConfigService {
   }
 
   loadConfig(){
-     return this.http.get('./assets/config.json').pipe(
+     return this.http.get('/src/assets/config.json').pipe(
       tap((config:any)=>{
         console.log(config);
           this.envConfig=config;
