@@ -15,12 +15,9 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-builders/custom-webpack:browser",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/jenkins-test",
-            "customWebpackConfig": {
-              "path": "custom-webpack.config.js"
-            },
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [

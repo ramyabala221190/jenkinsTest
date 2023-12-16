@@ -31,6 +31,7 @@ export class EnvironmentConfigService {
   }
 
   loadConfig(){
+    console.log(envconfig)
     this.envConfig=envconfig
     return of(true)
   }
