@@ -1,14 +1,10 @@
 services:
-   nginx:
-     container_name: ${containerName}
-     image: ${baseImageName}
-     environment: #run time arguments
-       - env=${environ}
-     build:
-        args:  #these args are available during build time
-           - env=${environ}
-           - port=${appPort}
-        context: ../
-        dockerfile: docker/Dockerfile
-     ports:
-       - ${appPort}:${containerPort}
+   nginx-dev:
+      extends:
+      file: common.yaml
+      service: app
+
+   nginx-prod:
+      extends:
+      file: common.yaml
+      service: app
