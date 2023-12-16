@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "Starting Container..."
 echo "Runtime arguments: env = ${env}"
-echo "Runtime arguments: port = ${port}"
-cp /usr/share/nginx/html/assets/environments/${env}/config.json /usr/share/nginx/html/assets/
+rm /usr/share/nginx/html/assets/config.json
+cp /usr/share/nginx/html/assets/environments/${env}/config.json /usr/share/nginx/html/assets/config.json
 nginx -g 'daemon off;'

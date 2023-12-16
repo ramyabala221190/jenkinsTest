@@ -2,14 +2,13 @@ services:
    nginx:
      container_name: ${containerName}
      image: ${baseImageName}
-     env_file :
-       - ${environ}.env # available only at run time
+     environment: #run time arguments
+       - env:${environ}
      build:
         args:  #these args are available during build time
            - env=${environ}
            - port=${appPort}
         context: ../
-        #dockerfile: docker/Dockerfile-commonBuild
         dockerfile: docker/Dockerfile
      ports:
        - ${appPort}:${containerPort}
