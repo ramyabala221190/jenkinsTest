@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, tap } from 'rxjs';
-import * as envconfig from '../assets/runtime-environment.json';
+import * as envconfig from '../assets/config.json';
 
 export interface environmentConfig{
   env:string|null,
