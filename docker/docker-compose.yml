@@ -3,7 +3,7 @@ services:
      container_name: ${containerName}
      image: ${baseImageName}
      environment: #run time arguments
-       - env:${environ}
+       - env=${environ}
      build:
         args:  #these args are available during build time
            - env=${environ}
