@@ -39,7 +39,8 @@ pipeline {
                     }
                     steps {
                         echo 'Running Docker Compose build'
-                        bat  "docker compose -f docker/docker-compose.yml build"
+                        //bat  "docker compose -f docker/docker-compose.yml build"
+                        bat "docker build ../ -f docker/Dockerfile --build-arg env='dev' --build-arg port=8082"
                     }
                 }
 
@@ -97,7 +98,10 @@ The same image with different tags will have the same image id. Its the same ima
                     steps {
                         echo 'Running Docker Compose Up'
                         script{
-                            bat "docker compose -f docker/docker-compose.yml up -d --force-recreate" //- d ensures it runs in deatched mode
+                            bat "docker stop "$(docker ps -a -q -f 'name=${containerName}')""
+                            bat "docker rm "$(docker ps -a -q -f 'name=${containerName}')""
+                            bat "docker run -d -p ${appPort}:${containerPort} ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:latest"
+                            //bat "docker compose -f docker/docker-compose.yml up -d --force-recreate" //- d ensures it runs in deatched mode
                             /*
 This will recreate if there are any existing containers with the same name. If not it will create new containers
                             */
