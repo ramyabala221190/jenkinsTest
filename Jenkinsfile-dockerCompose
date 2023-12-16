@@ -98,8 +98,8 @@ The same image with different tags will have the same image id. Its the same ima
                     steps {
                         echo 'Running Docker Compose Up'
                         script{
-                            bat "docker stop "$(docker ps -a -q -f 'name=${containerName}')""
-                            bat "docker rm "$(docker ps -a -q -f 'name=${containerName}')""
+                            bat "docker stop "$(bat "docker ps -a -q -f 'name=${containerName}'")""
+                            bat "docker rm "$(bat "docker ps -a -q -f 'name=${containerName}'")""
                             bat "docker run -d -p ${appPort}:${containerPort} ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:latest"
                             //bat "docker compose -f docker/docker-compose.yml up -d --force-recreate" //- d ensures it runs in deatched mode
                             /*
