@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, tap } from 'rxjs';
+import * as envconfig from '../assets/runtime-environment.json';
 
 export interface environmentConfig{
   env:string|null,
@@ -30,7 +31,7 @@ export class EnvironmentConfigService {
   }
 
   loadConfig(){
-    this.envConfig=$ENV;
+    this.envConfig=envconfig
     return of(true)
   }
 

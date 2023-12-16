@@ -47,14 +47,12 @@ COPY --from=node /app/dist/jenkins-test /usr/share/nginx/html/
 # have added an additional check. When we are routing to other components with different paths,
 # nginx might think its a server side path and return 404. In such cases we instruct nginx to 
 # redirect to index.html file. This is very important
-COPY config/nginx.config /etc/nginx/conf.d/default.conf
+COPY nginx/nginx.config /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
 ADD docker/startup.sh /startup.sh
 RUN chmod +x /startup.sh
-CMD ["nginx","-g","daemon off;"]
-#ENTRYPOINT ["sh","/startup.sh"]
-ENTRYPOINT [ "/usr/bin/local/node","envsub /usr/share/nginx/html/assets/runtime-environment.json" ]
+ENTRYPOINT ["sh","/startup.sh"]
 #the command to be executed when the docker container starts. -g daemon off indicates that nginx must run in the foreground
 #this command must execute execute successfully. Otherwise you cannot open the application in the browser.
