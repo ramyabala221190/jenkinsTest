@@ -43,6 +43,8 @@ RUN rm -r /usr/share/nginx/html/*
 #Now I need to access the dist folder from the previous stage. 
 # I copy the dist folder into the folder that nginx uses to refer static files.
 COPY --from=node /app/dist/jenkins-test /usr/share/nginx/html/
+
+RUN rm /usr/share/nginx/html/assets/config.json
 # to replace the default nginx config file with our config file. In our config file we
 # have added an additional check. When we are routing to other components with different paths,
 # nginx might think its a server side path and return 404. In such cases we instruct nginx to 
@@ -53,7 +55,6 @@ EXPOSE 80
 
 ADD docker/startup.sh /startup.sh
 RUN chmod +x /startup.sh
-RUN chmod +x /usr/share/nginx/html/assets/config.json
 ENTRYPOINT ["sh","/startup.sh"]
 #the command to be executed when the docker container starts. -g daemon off indicates that nginx must run in the foreground
 #this command must execute execute successfully. Otherwise you cannot open the application in the browser.
