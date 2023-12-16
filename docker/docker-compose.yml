@@ -1,10 +1,10 @@
 services:
    nginx-dev:
       extends:
-      file: common.yaml
-      service: app
+        file: common.yaml
+        service: app
 
    nginx-prod:
       extends:
-      file: common.yaml
-      service: app
+        file: common.yaml
+        service: app
