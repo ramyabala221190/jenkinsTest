@@ -8,12 +8,11 @@ import { EnvironmentConfigService, environmentConfig } from './environment-confi
 })
 export class AppComponent {
   title:string="jenkinsTest"
-  constructor(private envConfigService:EnvironmentConfigService){
+  constructor(private envConfigService:EnvironmentConfigService){}
 
-  }
+  config:environmentConfig={env:null,port:null}
 
   ngOnInit(){
-    let config:environmentConfig=this.envConfigService.fetchEnvConfig();
-    console.log(`App is being run in ${config.env} environment on port ${config.port}`);
+    this.config=this.envConfigService.fetchEnvConfig();
     }
 }
