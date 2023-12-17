@@ -1,4 +1,4 @@
 {
-    "env":"uat",
+    "env":"UAT",
     "port":8084
 }

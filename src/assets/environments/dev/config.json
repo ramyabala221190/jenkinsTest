@@ -1,4 +1,4 @@
 {
-    "env":"dev",
+    "env":"DEV",
     "port":8082
 }
