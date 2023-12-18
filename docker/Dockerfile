@@ -52,6 +52,7 @@ EXPOSE 80
 
 ADD docker/startup.sh /startup.sh
 RUN chmod +x /startup.sh
-ENTRYPOINT ["sh","/startup.sh"]
+CMD /startup.sh
+#ENTRYPOINT ["sh","/startup.sh"]
 #the command to be executed when the docker container starts. -g daemon off indicates that nginx must run in the foreground
 #this command must execute execute successfully. Otherwise you cannot open the application in the browser.
