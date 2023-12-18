@@ -18,7 +18,6 @@ pipeline {
         containerPort=80 //fix the container port
         toRepositoryName="angular-nginx-${env.environment}" //repository to which the image will be pushed
         containerName="angular-nginx-${env.environment}-container"
-        //baseImageName="angular-nginx"
     }
 
     stages{
@@ -34,36 +33,12 @@ pipeline {
                 }
               
                 stage('Docker Build') {
-                    //  when {
-                    //     environment name: 'environment', value: 'dev'
-                    // }
                     steps {
                         echo 'Running Docker Compose build'
                         bat  "docker compose -f docker/docker-compose.yml build nginx-${env.environment}"
                     }
                 }
 
-                // stage('Docker Pull and Tag Image') {
-                //    when {
-                //         environment name: 'environment', value: 'prod'
-                //     }
-                //     steps{
-                //         echo 'Pulling latest image from low enviornment repository in DockerHub'
-                //         bat "docker image pull ${DOCKER_HUB_CRED_USR}/${fromRepositoryName}:latest"
-                //         bat "docker image tag ${DOCKER_HUB_CRED_USR}/${fromRepositoryName} ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${env.BUILD_NUMBER}"
-                //         bat "docker image tag ${DOCKER_HUB_CRED_USR}/${fromRepositoryName} ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:latest"
-
-                //     }  
-                // }
-
-                // stage('Docker Tag Image'){
-                //     //   when {
-                //     //     environment name: 'environment', value: 'dev'
-                //     // }
-                //     steps{
-                //         bat  "docker image tag ${DOCKER_HUB_CRED_USR}/${toRepositoryName} ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${buildNumber}"
-                //     }
-                // }
                 stage('Docker login'){
                     steps {
                    echo 'Logging in to DockerHub'
@@ -75,15 +50,7 @@ pipeline {
                     
                     steps{
                         echo 'Pushing image to DockerHub'
-                        /*
-We have built an image with the name :angular-nginx-image as specified in the docker-compose.yml. We need to tag this image to the format:
-DockerhubUsername/DockerHubRepoName/some-image-name:tag
-Not that the tagged image is pushed to the Docker hub.
-https://docs.docker.com/get-started/04_sharing_app/ Refer to this for more details on this step
-The same image with different tags will have the same image id. Its the same image tagged differently.*/
                        bat  "docker image push ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${buildNumber}"
-
-
                     }
                     post {
                         success {
@@ -112,13 +79,3 @@ This will recreate if there are any existing containers with the same name. If n
     }
 
 }
-
-// def envPortMapping(envName){
-
-//     if(envName.equals("dev")){
-//         return 8082;
-//     }
-//     else if(envName.equals("prod")) {
-//         return 8083;
-//     }
-// }
