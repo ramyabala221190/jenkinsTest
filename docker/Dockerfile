@@ -5,9 +5,8 @@
 FROM node:alpine as node
 
 ARG env
-ARG port
 
-RUN echo "Build time arguments : ${env}, ${port}"
+RUN echo "Build time arguments : env=${env}"
 
 LABEL author="Angular Enthusiast"
 LABEL devURL="http://localhost:8082"
@@ -27,7 +26,7 @@ RUN npm install
 COPY . .
 #copy all the files and folders from the directory where the Dockerfile is present into the working directory i.e /app
 
-RUN npm run build
+RUN npm run build:${env}
 #Stage 2
 
 FROM nginx:alpine

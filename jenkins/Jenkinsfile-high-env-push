@@ -1,0 +1,77 @@
+/* groovylint-disable NestedBlockDepth */
+/* groovylint-disable-next-line CompileStatic */
+
+
+pipeline {
+    agent any
+
+    options {
+        skipDefaultCheckout(true) //prevent default checkout of git branch
+        timestamps() //Add timestamps to the Console Output
+    }
+
+    environment{
+        DOCKER_HUB_CRED=credentials('dockerHubRegistryCredentials') //pulling the DockerHub crendetials saved in Jenkins-->Dashboard--->Credentials
+        environ="${env.environment}" //environment info from pipeline input
+        appPort=envPortMapping(env.environment) //decide the application port based on the environment
+        fromRepositoryName="angular-nginx-dev"
+        toRepositoryName="angular-nginx-${env.environment}"
+        containerName="angular-nginx-${env.environment}-container"
+    }
+
+    stages{
+        stage('Docker Workflow') {
+            stages{
+
+                stage('Docker Pull and Tag Image') {
+
+                    steps{
+                        echo 'Pulling latest image from low enviornment repository in DockerHub'
+                        bat "docker image pull ${DOCKER_HUB_CRED_USR}/${fromRepositoryName}:${env.tag}"
+                        bat "docker image tag ${DOCKER_HUB_CRED_USR}/${fromRepositoryName} ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${env.BUILD_NUMBER}"
+                    }  
+                }
+
+                stage('Docker login'){
+                    steps {
+                   echo 'Logging in to DockerHub'
+                       bat  "docker login -u ${DOCKER_HUB_CRED_USR} -p ${DOCKER_HUB_CRED_PSW} docker.io"
+                       bat  "docker image prune --force"
+                    }
+                }
+                stage('Docker Push') {
+                    
+                    steps{
+                        echo 'Pushing image to DockerHub'
+                       bat  "docker image push ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${env.BUILD_NUMBER}"
+                    }
+                    post {
+                        success {
+                            bat "docker logout" //logout from docker
+                        }
+                    }
+                }
+                stage('Docker Compose Up') {
+                    
+                    steps {
+                        echo 'Running Docker Compose Up'
+                        script{
+                            bat "docker compose -f ../docker/docker-compose.yml up -d --remove-orphans nginx-${env.environment}" //- d ensures it runs in deatched mode
+                            //bat "docker cp ./src/assets/environments/${env.environment}.config.json ${containerName}:/usr/share/nginx/html/assets/environments/runtime-environment.json"
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+def envPortMapping(envName){
+    if(envName.equals("prod")) {
+        return 8083;
+    }
+    else if (envName.equals("uat")){
+        return 8084;
+    }
+}
