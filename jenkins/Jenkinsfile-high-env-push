@@ -14,9 +14,9 @@ pipeline {
         DOCKER_HUB_CRED=credentials('dockerHubRegistryCredentials') //pulling the DockerHub crendetials saved in Jenkins-->Dashboard--->Credentials
         environ="${env.environment}" //environment info from pipeline input
         appPort=envPortMapping(env.environment) //decide the application port based on the environment
-        fromRepositoryName="angular-nginx-dev"
-        toRepositoryName="angular-nginx-${env.environment}"
-        containerName="angular-nginx-${env.environment}-container"
+        fromRepositoryName=envRepoMapping(env.environment) //decide the repository from which the image needs to be pulled
+        toRepositoryName="angular-nginx-${env.environment}" //the repository to which the image needs to be pushed
+        containerName="angular-nginx-${env.environment}-container" //container name
     }
 
     stages{
@@ -28,7 +28,7 @@ pipeline {
                     steps{
                         echo 'Pulling latest image from low enviornment repository in DockerHub'
                         bat "docker image pull ${DOCKER_HUB_CRED_USR}/${fromRepositoryName}:${env.tag}"
-                        bat "docker image tag ${DOCKER_HUB_CRED_USR}/${fromRepositoryName} ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${env.BUILD_NUMBER}"
+                        bat "docker image tag ${DOCKER_HUB_CRED_USR}/${fromRepositoryName}:${env.tag} ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${env.BUILD_NUMBER}"
                     }  
                 }
 
@@ -56,6 +56,9 @@ pipeline {
                     steps {
                         echo 'Running Docker Compose Up'
                         script{
+                            /*
+connect to a remote server, pull the docker image and run docker compose up
+                        */
                             bat "docker compose -f ../docker/docker-compose.yml up -d --remove-orphans nginx-${env.environment}" //- d ensures it runs in deatched mode
                             //bat "docker cp ./src/assets/environments/${env.environment}.config.json ${containerName}:/usr/share/nginx/html/assets/environments/runtime-environment.json"
                         }
@@ -74,4 +77,13 @@ def envPortMapping(envName){
     else if (envName.equals("uat")){
         return 8084;
     }
+}
+
+def envRepoMapping(envName){
+    if(envName.equals("prod")) {
+        return "angular-nginx-uat";
+    }
+    else if (envName.equals("uat")){
+        return "angular-nginx-dev";
+    } 
 }

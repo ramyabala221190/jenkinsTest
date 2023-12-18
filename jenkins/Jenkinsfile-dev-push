@@ -15,10 +15,9 @@ pipeline {
         environ="${env.environment}" //environment info from pipeline input
         appPort=8082 //fix the application port
         containerPort=80 //fix the container port
-       // fromRepositoryName="angular-nginx-dev"
-        toRepositoryName="angular-nginx-${env.environment}"
+        toRepositoryName="angular-nginx-${env.environment}" //repository to which the image will be pushed
         containerName="angular-nginx-${env.environment}-container"
-        baseImageName="angular-nginx"
+        //baseImageName="angular-nginx"
     }
 
     stages{
@@ -61,7 +60,7 @@ pipeline {
                     //     environment name: 'environment', value: 'dev'
                     // }
                     steps{
-                        bat  "docker image tag angular-nginx ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${env.BUILD_NUMBER}"
+                        bat  "docker image tag ${DOCKER_HUB_CRED_USR}/${toRepositoryName} ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${env.BUILD_NUMBER}"
                     }
                 }
                 stage('Docker login'){
@@ -81,7 +80,7 @@ DockerhubUsername/DockerHubRepoName/some-image-name:tag
 Not that the tagged image is pushed to the Docker hub.
 https://docs.docker.com/get-started/04_sharing_app/ Refer to this for more details on this step
 The same image with different tags will have the same image id. Its the same image tagged differently.*/
-                       //bat  "docker image push --all-tags ${DOCKER_HUB_CRED_USR}/${toRepositoryName}"
+                       bat  "docker image push ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${env.BUILD_NUMBER}"
 
 
                     }
@@ -91,9 +90,12 @@ The same image with different tags will have the same image id. Its the same ima
                         }
                     }
                 }
-                stage('Docker Compose Up') {
+                stage('Docker Deploy and Compose Up') {
                     
                     steps {
+                        /*
+connect to a remote server, pull the docker image and run docker compose up
+                        */
                         echo 'Running Docker Compose Up'
                         script{
                             bat "docker compose -f docker/docker-compose.yml up -d --remove-orphans nginx-${env.environment}" //- d ensures it runs in deatched mode

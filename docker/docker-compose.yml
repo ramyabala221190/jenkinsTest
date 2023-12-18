@@ -8,3 +8,8 @@ services:
       extends:
         file: common.yml
         service: app
+
+   nginx-uat:
+      extends:
+        file: common.yml
+        service: app
