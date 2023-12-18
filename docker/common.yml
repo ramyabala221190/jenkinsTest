@@ -1,7 +1,7 @@
 services:
    app:
      container_name: ${containerName}
-     image: ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:$${BUILD_NUMBER}
+     image: ${DOCKER_HUB_CRED_USR}/${toRepositoryName}
      environment: #run time arguments
        - env=${environ}
      build:
