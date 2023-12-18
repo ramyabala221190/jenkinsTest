@@ -9,7 +9,6 @@ ARG port
 
 RUN echo "Build time arguments : ${env}, ${port}"
 
-#ENV CHROME_BIN="C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
 LABEL author="Angular Enthusiast"
 LABEL devURL="http://localhost:8082"
 LABEL prodUrl="http://localhost:8083"
@@ -27,8 +26,6 @@ RUN npm cache clean --force
 RUN npm install
 COPY . .
 #copy all the files and folders from the directory where the Dockerfile is present into the working directory i.e /app
-
-#RUN npm run test
 
 RUN npm run build
 #Stage 2
