@@ -55,14 +55,14 @@ pipeline {
                 //     }  
                 // }
 
-                stage('Docker Tag Image'){
-                    //   when {
-                    //     environment name: 'environment', value: 'dev'
-                    // }
-                    steps{
-                        bat  "docker image tag ${DOCKER_HUB_CRED_USR}/${toRepositoryName} ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${env.BUILD_NUMBER}"
-                    }
-                }
+                // stage('Docker Tag Image'){
+                //     //   when {
+                //     //     environment name: 'environment', value: 'dev'
+                //     // }
+                //     steps{
+                //         bat  "docker image tag ${DOCKER_HUB_CRED_USR}/${toRepositoryName} ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${env.BUILD_NUMBER}"
+                //     }
+                // }
                 stage('Docker login'){
                     steps {
                    echo 'Logging in to DockerHub'
