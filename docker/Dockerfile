@@ -41,7 +41,7 @@ RUN rm -r /usr/share/nginx/html/*
 # I copy the dist folder into the folder that nginx uses to refer static files.
 COPY --from=node /app/dist/jenkins-test /usr/share/nginx/html/
 
-RUN rm /usr/share/nginx/html/assets/runtime-environment.json
+RUN rm /usr/share/nginx/html/assets/*.json*
 # to replace the default nginx config file with our config file. In our config file we
 # have added an additional check. When we are routing to other components with different paths,
 # nginx might think its a server side path and return 404. In such cases we instruct nginx to 
