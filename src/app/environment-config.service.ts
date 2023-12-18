@@ -32,7 +32,7 @@ export class EnvironmentConfigService {
   }
 
   loadConfig(){
-     return this.http.get('/assets/runtime-environment.json').pipe(
+     return this.http.get('/assets/environments/runtime-environment.json').pipe(
       tap((config:any)=>{
         console.log(config);
           this.envConfig=config;
