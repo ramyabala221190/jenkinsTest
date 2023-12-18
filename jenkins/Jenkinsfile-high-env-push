@@ -14,6 +14,7 @@ pipeline {
         DOCKER_HUB_CRED=credentials('dockerHubRegistryCredentials') //pulling the DockerHub crendetials saved in Jenkins-->Dashboard--->Credentials
         environ="${env.environment}" //environment info from pipeline input
         appPort=envPortMapping(env.environment) //decide the application port based on the environment
+        containerPort=80 //fix the container port
         fromRepositoryName=envRepoMapping(env.environment) //decide the repository from which the image needs to be pulled
         toRepositoryName="angular-nginx-${env.environment}" //the repository to which the image needs to be pushed
         containerName="angular-nginx-${env.environment}-container" //container name
