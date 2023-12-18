@@ -13,6 +13,7 @@ pipeline {
     environment{
         DOCKER_HUB_CRED=credentials('dockerHubRegistryCredentials') //pulling the DockerHub crendetials saved in Jenkins-->Dashboard--->Credentials
         environ="${env.environment}" //environment info from pipeline input
+        buildNumber="${env.BUILD_NUMBER}"
         appPort=envPortMapping(env.environment) //decide the application port based on the environment
         containerPort=80 //fix the container port
         fromRepositoryName=envRepoMapping(env.environment) //decide the repository from which the image needs to be pulled
@@ -37,7 +38,7 @@ pipeline {
                     steps{
                         echo 'Pulling latest image from low enviornment repository in DockerHub'
                         bat "docker image pull ${DOCKER_HUB_CRED_USR}/${fromRepositoryName}:${env.tag}"
-                        bat "docker image tag ${DOCKER_HUB_CRED_USR}/${fromRepositoryName}:${env.tag} ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${env.BUILD_NUMBER}"
+                        bat "docker image tag ${DOCKER_HUB_CRED_USR}/${fromRepositoryName}:${env.tag} ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${buildNumber}"
                     }  
                 }
 
@@ -52,7 +53,7 @@ pipeline {
                     
                     steps{
                         echo 'Pushing image to DockerHub'
-                       bat  "docker image push ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${env.BUILD_NUMBER}"
+                       bat  "docker image push ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${buildNumber}"
                     }
                     post {
                         success {
