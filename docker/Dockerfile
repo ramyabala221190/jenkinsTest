@@ -5,6 +5,7 @@
 FROM node:alpine as node
 
 ARG env
+#build time arguments
 
 RUN echo "Build time arguments : env=${env}"
 
@@ -26,7 +27,7 @@ RUN npm install
 COPY . .
 #copy all the files and folders from the directory where the Dockerfile is present into the working directory i.e /app
 
-RUN npm run build:${env}
+RUN npm run build
 #Stage 2
 
 FROM nginx:alpine
