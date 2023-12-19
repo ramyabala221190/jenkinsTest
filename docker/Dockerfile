@@ -1,5 +1,5 @@
 
-#Stage 2 Creating angular build(dist folder). 
+#Stage 1 Creating angular build(dist folder). 
 #as node means you are creating an alias for this stage to be accessed in the future stages
 
 FROM node:alpine as node
@@ -50,8 +50,9 @@ COPY nginx/nginx.config /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
-ADD docker/startup.sh /startup.sh
-RUN chmod +x /startup.sh
-ENTRYPOINT ["sh","/startup.sh"]
+# ADD docker/startup.sh /startup.sh
+# RUN chmod +x /startup.sh
+# ENTRYPOINT ["sh","/startup.sh"]
+CMD ["nginx", "-g", "daemon off;"]
 #the command to be executed when the docker container starts. -g daemon off indicates that nginx must run in the foreground
 #this command must execute execute successfully. Otherwise you cannot open the application in the browser.

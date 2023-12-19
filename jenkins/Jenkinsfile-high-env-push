@@ -70,7 +70,7 @@ pipeline {
 connect to a remote server, pull the docker image and run docker compose up
                         */
                             bat "docker compose -f docker/docker-compose.yml up -d --remove-orphans --no-build nginx-${environ}" //- d ensures it runs in deatched mode
-                            //bat "docker cp ./src/assets/environments/${env.environment}.config.json ${containerName}:/usr/share/nginx/html/assets/environments/runtime-environment.json"
+                            bat "docker cp /src/assets/environments/${environ}.config.json ${containerName}:/usr/share/nginx/html/assets/environments/runtime-environment.json"
                         }
                     }
                 }

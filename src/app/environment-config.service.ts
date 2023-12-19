@@ -10,7 +10,7 @@ export interface environmentConfig{
 
 /*
 Set the below in tsconfig.json to import the json into the .ts file
- "esModuleInterop":true,
+    "esModuleInterop":true,
     "resolveJsonModule":true,
 
     Also set below to allow js file imports into .ts file
@@ -26,7 +26,7 @@ Set the below in tsconfig.json to import the json into the .ts file
 export class EnvironmentConfigService {
 
   constructor(private http:HttpClient) { }
-  envConfig:environmentConfig={
+  private envConfig:environmentConfig={
     env:null,
     port:null
   }
