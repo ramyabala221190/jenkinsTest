@@ -35,15 +35,17 @@ pipeline {
                 stage('Docker Build') {
                     steps {
                         echo 'Running Docker Compose build'
-                        bat  "docker compose -f docker/docker-compose.yml build nginx-${env.environment}"
+                        bat bat/docker-compose-build.bat
+                        //bat  "docker compose -f docker/docker-compose.yml build nginx-${env.environment}"
                     }
                 }
 
                 stage('Docker login'){
                     steps {
                    echo 'Logging in to DockerHub'
-                       bat  "docker login -u ${DOCKER_HUB_CRED_USR} -p ${DOCKER_HUB_CRED_PSW} docker.io"
-                       bat  "docker image prune --force"
+                     bat bat/docker-login.bat
+                       //bat  "docker login -u ${DOCKER_HUB_CRED_USR} -p ${DOCKER_HUB_CRED_PSW} docker.io"
+                       //bat  "docker image prune --force"
                     }
                 }
                 stage('Docker Push') {
@@ -66,7 +68,8 @@ connect to a remote server, pull the docker image and run docker compose up
                         */
                         echo 'Running Docker Compose Up'
                         script{
-                            bat "docker compose -f docker/docker-compose.yml up -d --remove-orphans --no-build nginx-${environ}" //- d ensures it runs in deatched mode
+                            bat bat/docker-compose-up.bat
+                           // bat "docker compose -f docker/docker-compose.yml up -d --remove-orphans --no-build nginx-${environ}" //- d ensures it runs in deatched mode
                             //bat "docker cp src/assets/environments/${environ}.config.json ${containerName}:/usr/share/nginx/html/assets/environments/runtime-environment.json"
                         }
                     }
