@@ -11,7 +11,10 @@ pipeline {
     }
 
     environment{
-        def envConfig = readJSON file: '../src/assets/environments/${env.environment}.config.json'
+        /*
+readJSON method comes from the Pipeline Utility Steps plugin in Jenkins
+        */
+        def envConfig = readJSON file: 'src/assets/environments/${env.environment}.config.json'
         DOCKER_HUB_CRED=credentials('dockerHubRegistryCredentials') //pulling the DockerHub crendetials saved in Jenkins-->Dashboard--->Credentials
         environ="${env.environment}" //environment info from pipeline input
         buildNumber="${env.BUILD_NUMBER}"
