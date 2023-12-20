@@ -11,10 +11,11 @@ pipeline {
     }
 
     environment{
+        def envConfig = readJSON file: '../src/assets/environments/${env.environment}.config.json'
         DOCKER_HUB_CRED=credentials('dockerHubRegistryCredentials') //pulling the DockerHub crendetials saved in Jenkins-->Dashboard--->Credentials
         environ="${env.environment}" //environment info from pipeline input
         buildNumber="${env.BUILD_NUMBER}"
-        appPort=8082 //fix the application port
+        appPort=envConfig.port //fix the application port
         containerPort=80 //fix the container port
         toRepositoryName="angular-nginx-${env.environment}" //repository to which the image will be pushed
         containerName="angular-nginx-${env.environment}-container"
