@@ -1,1 +1,0 @@
-docker compose -f docker/docker-compose.yml up -d --remove-orphans --no-build nginx-${environ}
