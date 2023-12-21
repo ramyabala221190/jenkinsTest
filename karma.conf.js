@@ -2,7 +2,7 @@
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
 process.env.CHROME_BIN = require('puppeteer').executablePath({
-  executablePath: "C:\\Program Files\\Google\\Chrome\\Application",
+  executablePath: "C:\\Program Files\\Google\\Chrome\\Application\chrome.exe",
   headless: true,
   args: ["--lang=en-US,en", '--no-sandbox', '--disable-setuid-sandbox', '--disable-extensions']
 });
