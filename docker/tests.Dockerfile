@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:20.5.0
 
 RUN apt-get update -qqy \
  && apt-get -qqy install xvfb \

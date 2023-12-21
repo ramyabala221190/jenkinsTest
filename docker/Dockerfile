@@ -3,7 +3,7 @@
 #as node means you are creating an alias for this stage to be accessed in the future stages
 
 #FROM node:alpine as node
-FROM kartikkhk/node-chrome:v2 as node
+FROM dockerenthusiast1992/node-karma:1.0.0 as node
 
 ARG env
 #build time arguments
@@ -25,7 +25,6 @@ COPY package.json package-lock.json ./
 RUN rm package-lock.json
 RUN npm cache clean --force
 RUN npm install
-#RUN npm install --save-dev chromium
 COPY . .
 #copy all the files and folders from the directory where the Dockerfile is present into the working directory i.e /app
 RUN npm run test
