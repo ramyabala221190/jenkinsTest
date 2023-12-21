@@ -2,7 +2,8 @@
 #Stage 1 Creating angular build(dist folder). 
 #as node means you are creating an alias for this stage to be accessed in the future stages
 
-FROM node:alpine as node
+#FROM node:alpine as node
+FROM dockerenthusiast1992/node-karma:1.0.0 as node
 
 ARG env
 #build time arguments
@@ -20,12 +21,12 @@ WORKDIR /app
 
 # node is the base image from which Docker will include all functionality into the image we will be crearting
 # Its like a parent class from which we are inheriting all features into the child class
-
 COPY package.json package-lock.json ./
 RUN npm cache clean --force
 RUN npm install
 COPY . .
 #copy all the files and folders from the directory where the Dockerfile is present into the working directory i.e /app
+RUN npm run test
 
 RUN npm run build
 #Stage 2
