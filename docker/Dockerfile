@@ -2,11 +2,6 @@
 #Stage 1 Creating angular build(dist folder). 
 #as node means you are creating an alias for this stage to be accessed in the future stages
 
-FROM ubuntu
-RUN apt-get update && apt-get install -y --no-install-recommends \
-  && apt-get install -y python3 \
-  && rm -rf /var/lib/apt/lists/*
-
 FROM node:alpine as node
 
 ARG env
@@ -18,15 +13,6 @@ LABEL author="Angular Enthusiast"
 LABEL devURL="http://localhost:8082"
 LABEL prodUrl="http://localhost:8083"
 LABEL description="We aim to deploy the angular app to DockerHub"
-
-RUN apt-get update \
-    && apt-get install -y wget gnupg \
-    && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-    && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
-    && apt-get update \
-    && apt-get install -y google-chrome-stable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 \
-      --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
@@ -40,6 +26,7 @@ COPY package.json package-lock.json ./
 RUN rm package-lock.json
 RUN npm cache clean --force
 RUN npm install
+RUN npm install --save-dev chromium
 COPY . .
 #copy all the files and folders from the directory where the Dockerfile is present into the working directory i.e /app
 RUN npm run test
