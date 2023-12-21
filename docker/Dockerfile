@@ -26,7 +26,7 @@ COPY package.json package-lock.json ./
 RUN rm package-lock.json
 RUN npm cache clean --force
 RUN npm install
-RUN npm install --save-dev chromium
+#RUN npm install --save-dev chromium
 COPY . .
 #copy all the files and folders from the directory where the Dockerfile is present into the working directory i.e /app
 RUN npm run test
