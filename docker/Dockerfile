@@ -20,8 +20,8 @@ WORKDIR /app
 
 # node is the base image from which Docker will include all functionality into the image we will be crearting
 # Its like a parent class from which we are inheriting all features into the child class
-
-
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+ && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
 COPY package.json package-lock.json ./
 RUN rm package-lock.json
 RUN npm cache clean --force
