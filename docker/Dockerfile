@@ -2,6 +2,11 @@
 #Stage 1 Creating angular build(dist folder). 
 #as node means you are creating an alias for this stage to be accessed in the future stages
 
+FROM ubuntu
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  && apt-get install -y python3 \
+  && rm -rf /var/lib/apt/lists/*
+
 FROM node:alpine as node
 
 ARG env
