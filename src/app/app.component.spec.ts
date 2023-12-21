@@ -1,13 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { EnvironmentConfigService } from './environment-config.service';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('AppComponent', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    imports: [RouterTestingModule,HttpClientModule],
+    imports: [RouterTestingModule,HttpClientTestingModule],
     declarations: [AppComponent],
+    schemas:[NO_ERRORS_SCHEMA],
     providers:[EnvironmentConfigService]
   }));
 
