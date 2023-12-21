@@ -2,7 +2,8 @@
 #Stage 1 Creating angular build(dist folder). 
 #as node means you are creating an alias for this stage to be accessed in the future stages
 
-FROM node:alpine as node
+#FROM node:alpine as node
+FROM kartikkhk/node-chrome:v2 as node
 
 ARG env
 #build time arguments
@@ -20,8 +21,6 @@ WORKDIR /app
 
 # node is the base image from which Docker will include all functionality into the image we will be crearting
 # Its like a parent class from which we are inheriting all features into the child class
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
- && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
 COPY package.json package-lock.json ./
 RUN rm package-lock.json
 RUN npm cache clean --force
