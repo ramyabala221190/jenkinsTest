@@ -1,17 +1,24 @@
 services:
-   nginx-dev:
-      extends:
-        file: common.yml
-        service: app
+   docker-nginx:
+     container_name: ${containerName}
+     environment: #run time arguments
+       - env=${environ}
+     build:
+        args:  #these args are available during build time
+           - env=${environ}
+        context: ../
+        dockerfile: docker/Dockerfile
+     ports:
+       - ${appPort}:${containerPort}
 
-   nginx-prod:
-      extends:
-        file: common.yml
-        service: app
-      image: ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${tag}
+  #  nginx-prod:
+  #     extends:
+  #       file: common.yml
+  #       service: app
+  #     image: ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${tag}
 
-   nginx-uat:
-      extends:
-        file: common.yml
-        service: app
-      image: ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${tag}
+  #  nginx-uat:
+  #     extends:
+  #       file: common.yml
+  #       service: app
+  #     image: ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${tag}
