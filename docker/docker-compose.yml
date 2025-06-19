@@ -1,12 +1,6 @@
 services:
    docker-nginx:
      container_name: ${containerName}
-     deploy:
-      resources:
-        limits:
-          memory: 4G
-        reservations:
-          memory: 2G
      environment: #run time arguments
        - env=${environ}
      build:
