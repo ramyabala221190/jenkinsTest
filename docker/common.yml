@@ -1,13 +1,9 @@
 services:
    app:
-     container_name: ${containerName}
+     container_name: angular-nginx-${environ}-container
      image: ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${buildNumber}
      environment: #run time arguments
        - env=${environ}
      build:
-        args:  #these args are available during build time
-           - env=${environ}
         context: ../
         dockerfile: docker/Dockerfile
-     ports:
-       - ${appPort}:${containerPort}

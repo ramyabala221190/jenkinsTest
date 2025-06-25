@@ -5,7 +5,7 @@ import { tap } from 'rxjs';
 
 export interface environmentConfig{
   env:string|null,
-  port:number|null
+  backendUrl:string|null
 }
 
 /*
@@ -28,7 +28,7 @@ export class EnvironmentConfigService {
   constructor(private http:HttpClient) { }
   private envConfig:environmentConfig={
     env:null,
-    port:null
+    backendUrl:null
   }
 
   loadConfig(){

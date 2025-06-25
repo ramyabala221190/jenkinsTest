@@ -3,10 +3,8 @@
 services:
    docker-nginx:
     container_name: angular-nginx-${environ}-container
-    env_file:
-      - environments/runtime.env
-    # environment: #run time arguments
-    #    - env=${environ}
+    environment: #run time arguments
+       - env=${environ}
     build:
         context: ../
         dockerfile: docker/Dockerfile
@@ -18,18 +16,24 @@ services:
   #     extends:
   #       file: common.yml
   #       service: app
+  #     ports:
+  #       - 8082:80
 
   #  nginx-prod:
   #     extends:
   #       file: common.yml
   #       service: app
   #     image: ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${tag}
+  #     ports:
+  #       - 8083:80
 
   #  nginx-uat:
   #     extends:
   #       file: common.yml
   #       service: app
   #     image: ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${tag}
+  #     ports:
+  #       - 8084:80
 
 
   #docker compose -f docker/docker-compose.yml -f docker/docker-compose.dev.yml build

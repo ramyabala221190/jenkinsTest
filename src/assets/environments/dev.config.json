@@ -1,4 +1,4 @@
 {
     "env":"DEV",
-    "port":8082
+    "backendUrl":"http://xyz:9090"
 }

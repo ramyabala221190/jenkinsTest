@@ -10,7 +10,7 @@ export class AppComponent {
   title:string="jenkinsTest"
   constructor(private envConfigService:EnvironmentConfigService){}
 
-  config:environmentConfig={env:null,port:null}
+  config:environmentConfig={env:null,backendUrl:null}
 
   ngOnInit(){
     this.config=this.envConfigService.fetchEnvConfig();

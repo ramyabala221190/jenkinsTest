@@ -17,6 +17,7 @@ WORKDIR /app
 # node is the base image from which Docker will include all functionality into the image we will be crearting
 # Its like a parent class from which we are inheriting all features into the child class
 COPY package.json package-lock.json ./
+RUN rm package-lock.json
 RUN npm cache clean --force
 RUN npm install
 COPY . .

@@ -1,4 +1,4 @@
 {
     "env":"PROD",
-    "port":8083
+    "backendUrl":"http://abc:9092"
 }
