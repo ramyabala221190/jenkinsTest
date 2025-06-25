@@ -7,6 +7,7 @@ FROM node:22.5.0 as node
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD="true"
 
+ENV NODE_OPTIONS=--max-old-space-size=4096
 
 LABEL author="Angular Enthusiast"
 LABEL devURL="http://localhost:8082"
