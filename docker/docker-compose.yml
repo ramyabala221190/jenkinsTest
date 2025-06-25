@@ -1,15 +1,11 @@
 services:
    docker-nginx:
-     container_name: ${containerName}
-     environment: #run time arguments
+    container_name: angular-nginx-${environ}-container
+    environment: #run time arguments
        - env=${environ}
-     build:
-        args:  #these args are available during build time
-           - env=${environ}
+    build:
         context: ../
         dockerfile: docker/Dockerfile
-     ports:
-       - ${appPort}:${containerPort}
 
   #  nginx-prod:
   #     extends:
@@ -22,3 +18,9 @@ services:
   #       file: common.yml
   #       service: app
   #     image: ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${tag}
+
+
+  #docker compose -f docker/docker-compose.yml -f docker/docker-compose.dev.yml build
+  #docker compose -f docker/docker-compose.yml -f docker/docker-compose.prod.yml build
+  #docker compose -f docker/docker-compose.yml -f docker/docker-compose.dev.yml up -d --remove-orphans --no-build
+  #docker compose -f docker/docker-compose.yml -f docker/docker-compose.prod.yml up -d --remove-orphans --no-build
