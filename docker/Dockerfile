@@ -5,6 +5,9 @@
 FROM node:22.5.0 as node
 #FROM dockerenthusiast1992/node-karma:1.0.0 as node
 
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD="true"
+
+
 LABEL author="Angular Enthusiast"
 LABEL devURL="http://localhost:8082"
 LABEL prodUrl="http://localhost:8083"
