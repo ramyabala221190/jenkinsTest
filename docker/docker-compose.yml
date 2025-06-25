@@ -1,11 +1,23 @@
+# If deploying to a remote server, we normally have seperate servers for each environment. 
+# thus a single service is enough when deploying to a server.
 services:
    docker-nginx:
     container_name: angular-nginx-${environ}-container
-    environment: #run time arguments
-       - env=${environ}
+    env_file:
+      - environments/runtime.env
+    # environment: #run time arguments
+    #    - env=${environ}
     build:
         context: ../
         dockerfile: docker/Dockerfile
+
+  # Define multiple services for multiple environments if running application locally to run 
+  # application  in different containers- one for each  environment
+
+  #  nginx-dev:
+  #     extends:
+  #       file: common.yml
+  #       service: app
 
   #  nginx-prod:
   #     extends:
