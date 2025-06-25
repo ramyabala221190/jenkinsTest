@@ -42,7 +42,6 @@ COPY --from=node /app/dist/jenkins-test /usr/share/nginx/html/
 
 RUN rm /usr/share/nginx/html/assets/environments/runtime-environment.json*
 
-COPY /usr/share/nginx/html/assets/environments/dev.env environments/runtime.env
 # to replace the default nginx config file with our config file. In our config file we
 # have added an additional check. When we are routing to other components with different paths,
 # nginx might think its a server side path and return 404. In such cases we instruct nginx to 
