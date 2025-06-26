@@ -1,6 +1,0 @@
-services:
-   docker-nginx:
-      image: ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${tag}
-      ports:
-       - 8083:80
-

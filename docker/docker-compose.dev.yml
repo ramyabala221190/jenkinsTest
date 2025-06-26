@@ -1,5 +1,0 @@
-services:
-   docker-nginx:
-      image: ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${buildNumber}
-      ports:
-       - 8082:80
