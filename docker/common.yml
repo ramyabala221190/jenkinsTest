@@ -1,7 +1,7 @@
 services:
    app:
      container_name: angular-nginx-${environ}-container
-     image: angular-nginx:${buildNumber}
+     image: ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${buildNumber}
      environment: #run time arguments
        - env=${environ}
      build:
