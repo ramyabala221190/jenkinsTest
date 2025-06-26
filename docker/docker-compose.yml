@@ -9,33 +9,7 @@ services:
         context: ../
         dockerfile: docker/Dockerfile
 
-  # Define multiple services for multiple environments if running application locally to run 
-  # application  in different containers- one for each  environment
-
-  #  nginx-dev:
-  #     extends:
-  #       file: common.yml
-  #       service: app
-  #     ports:
-  #       - 8082:80
-
-  #  nginx-prod:
-  #     extends:
-  #       file: common.yml
-  #       service: app
-  #     image: ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${tag}
-  #     ports:
-  #       - 8083:80
-
-  #  nginx-uat:
-  #     extends:
-  #       file: common.yml
-  #       service: app
-  #     image: ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${tag}
-  #     ports:
-  #       - 8084:80
-
-
+ 
   #docker compose -f docker/docker-compose.yml -f docker/docker-compose.dev.yml build
   #docker compose -f docker/docker-compose.yml -f docker/docker-compose.prod.yml build
   #docker compose -f docker/docker-compose.yml -f docker/docker-compose.dev.yml up -d --remove-orphans --no-build
