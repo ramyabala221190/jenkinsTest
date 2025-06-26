@@ -2,8 +2,9 @@
 #Stage 1 Creating angular build(dist folder). 
 #as node means you are creating an alias for this stage to be accessed in the future stages
 
-FROM node:22.5.0 as node
+# FROM node:22.5.0 as node
 #FROM dockerenthusiast1992/node-karma:1.0.0 as node
+FROM node:18 as node
 
 LABEL author="Angular Enthusiast"
 LABEL devURL="http://localhost:8082"
@@ -19,7 +20,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN rm package-lock.json
 RUN npm cache clean --force
-RUN npm install
+RUN npm install --verbose
 COPY . .
 #copy all the files and folders from the directory where the Dockerfile is present into the working directory i.e /app
 #RUN npm run test
