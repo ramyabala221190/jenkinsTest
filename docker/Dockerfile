@@ -4,7 +4,7 @@
 
 # FROM node:22.5.0 as node
 #FROM dockerenthusiast1992/node-karma:1.0.0 as node
-FROM node:18 as node
+FROM node:18-bullseye as node
 
 LABEL author="Angular Enthusiast"
 LABEL devURL="http://localhost:8082"
