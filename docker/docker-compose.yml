@@ -23,7 +23,6 @@ services:
       extends:
         file: common.yml
         service: app
-      image: ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${tag}
       ports:
         - 8083:80
 
@@ -31,7 +30,6 @@ services:
       extends:
         file: common.yml
         service: app
-      image: ${DOCKER_HUB_CRED_USR}/${toRepositoryName}:${tag}
       ports:
         - 8084:80
 
